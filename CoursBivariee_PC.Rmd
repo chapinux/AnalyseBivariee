@@ -1,0 +1,180 @@
+---
+title: "Analyse Bivariée (avec R)"
+author: "PC"
+date: "26 novembre 2018"
+output: ioslides_presentation
+css : style.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,fig.width =6,fig.align="center", fig.height = 3)
+```
+
+# Introduction générale 
+
+## Reférences
+
+- Cours M2 IGAST 2017 d'Élodie Buard 
+- R et espace https://framabook.org/r-et-espace/
+- Probabilités, analyse de données et statistiques , Gilbert Saporta, Editions TECHNIP, 2011
+- Nombreuses ressources en ligne : 
+   http://www.foad-mooc.auf.org/IMG/pdf/424B_-Application_des_methodes_statistiques_d_analyse.pdf
+
+## Deux familles statistiques
+
+### Statistiques inférentielles
+  A partir d'un échantillon , que peut-on attendre (inférer) de la population ?
+  
+  - Modèles, estimateurs, ... : **régression** , **estimation**, **extrapolation**
+  - e.g. sondages, rencensement 
+
+## Deux familles statistiques
+  
+### Statistiques descriptives 
+  Pour décrire, résumer, synthétiser  les propriétés d'une **population** à partir de ses **individus** et des **variables** qui les décrivent.
+  
+  - Graphiques
+  - Mesures (fréquences , distributions , moments)
+  - *Liaisons* statistiques : **corrélation**, **covariance**
+  - classification , ACP,...
+
+## Vocabulaire 
+ 
+### Population
+ **Ensemble** d'individus  
+ 
+ "données", "corpus", "échantillon", "data"
+ 
+### Individus
+ Unité statistique **élémentaire**: personnes, logements, ...
+ 
+ 
+ "les lignes du tableau"
+
+## Vocabulaire 
+
+### Variables 
+ **Caractéristiques, propriétés** d’un individu, mesurées par des enquêtes, des observations...
+
+"les colonnes du tableau"  
+
+- **Qualitatives** : facteurs e.g. Sexe, CSP, type , notion de **modalité**
+ 
+- **Quantitatives** : nombres e.g. Taille, revenu, surface
+
+
+
+<span style="color:red">&#9888;</span> **Valeurs** et **Nature** de données sont deux choses distinctes. 
+<center> 3≠trois≠III </center>
+
+
+
+ <span style="color:red">&#9888;</span> Valeurs manquantes  
+ <center> NA , NaN, Null </center>
+
+
+
+
+
+## Analyse bivariée
+
+**Analyser**  le **lien** entre deux variables
+
+
+- **2 variables quantitatives**
+
+"nombre d'habitants et nombre de lignes de bus  par département"
+
+"nombre de lignes de bus en 1998 et en 2018" 
+
+- **2 variables qualitatives** 
+
+ "couleur des yeux  et port de lunettes" <span style="color:red; font-size:80%">(&#9888; comparable?)</span>
+
+- **Une variable quantitative, une variable qualitative** 
+
+"taille et couleur des yeux"  <span style="color:red; font-size:80%">(&#9888; comparable?)</span>
+
+
+## Mise en garde
+
+Une liaison, même très forte, entre deux variables, <span style="color:red">n'indique pas la causalité!</span>
+
+Erreur très courrante, très tentante.
+<center>
+<img src="chart.svg", width=100%></img>
+</center>
+© TylerVigen http://tylervigen.com/spurious-correlations
+
+
+
+# Lien entre deux variables qualitatives
+
+
+
+## Premier réflexe à avoir  
+Regarder l'aspect des données avec des graphiques (exploration)
+
+```{r plotIris}
+data(iris)
+plot(iris)
+```
+
+
+
+
+
+## Matrice de corrélations 
+
+
+```{r corIris}
+cor(iris[,1:4])
+```
+
+Donne le **coefficient de corrélation** $\in [-1;1]$
+
+- +1 : les deux variables croissent ou décroissent conjointement
+- -1 : quand l'une des variables croît, l'autre décroît.
+- 0 : pas de relation **linéaire** entre les deux variables
+ 
+ <font size="3">Coefficient de Pearson par defaut, argument `method` de la fonction `cor()` permet de spécifier deux autres coefficients : Kendall et Spearman.</font>
+
+
+## Test de corrélation entre deux variables
+
+```{r cortestIris}
+cor.test(iris$Petal.Length, iris$Petal.Width)
+```
+
+
+## Sensibilité aux 'outliers'
+
+```{r sensitiveOut1}
+X <-  c(3,2,3,4,1,2,3,4,5,2,3,4,3)
+Y <-  c(1,2,2,2,3,3,3,3,3,4,4,4,5)
+plot(X, Y, xlim = c(0,16), ylim= c(0,16))
+cor.test(X,Y)$estimate
+```
+
+
+## Sensibilité aux 'outliers'
+
+```{r sensitiveOut2}
+X <-  c(3,2,3,4,1,2,3,4,5,2,3,4,3,15)
+Y <-  c(1,2,2,2,3,3,3,3,3,4,4,4,5,15)
+plot(X, Y, xlim = c(0,16), ylim= c(0,16))
+cor.test(X,Y)$estimate
+```
+
+
+
+## Regression linéaire 
+
+Fonction  `lm()` , modèle de la forme `réponse ~ termes` 
+
+```{r regress, echo=TRUE }
+my_model <- lm(Petal.Width~Petal.Length, iris)
+summary(my_model)
+```
+
