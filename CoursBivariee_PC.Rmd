@@ -86,7 +86,7 @@ knitr::opts_chunk$set(echo = TRUE,fig.width =6,fig.align="center", fig.height = 
 
 "nombre d'habitants et nombre de lignes de bus  par département"
 
-"nombre de lignes de bus en 1998 et en 2018" 
+"nombre de lignes de bus en 1998 et en 2018"  (stabilité ?)
 
 - **2 variables qualitatives** 
 
@@ -95,6 +95,7 @@ knitr::opts_chunk$set(echo = TRUE,fig.width =6,fig.align="center", fig.height = 
 - **Une variable quantitative, une variable qualitative** 
 
 "taille et couleur des yeux"  <span style="color:red; font-size:80%">(&#9888; comparable?)</span>
+
 
 
 ## Mise en garde
@@ -123,7 +124,74 @@ plot(iris)
 
 
 
+## Deuxième étape 
 
+Calcul d'un **indicateur** représentant ce lien: une **droite de régression** sur le nuage de points, qui donne: 
+
+* l'**intensité** du lien / de la dépendance  : points proche de la droite ou non ?
+* la **forme** de la dépendance : linéaire ou non ?
+* le **sens** de la dépendance  : nulle, positive ou négative ?
+```{r regline, echo=FALSE}
+library(ggplot2)
+data <-  data.frame(X=c(1,2,3,5,6,7,12,14,22, 2,3 ),Y=c(15,16,13, 9,9,12,3,2,5,11,12))
+plo <-  ggplot(data, aes(x=X, y=Y))+
+  geom_point()+
+  geom_smooth(method="lm", se=FALSE) 
+plo
+```
+
+
+## Forme des dépendances 
+
+```{r formes, echo=FALSE, fig.width= 8, fig.height=5}
+x <- runif(100, min = 0, max=10)
+y1 <- 8.5*x - 23 + rnorm(100,0, 12)
+y2 <- -16*x +12 + rnorm(100,0,10)
+y3 <- sqrt(exp(x)) + rnorm(100,0,8)
+y4 <-  50*sin(x) + rnorm(100,0,10)
+y5 <-  rnorm(100, 0, 60)
+y6 <- 21.345
+data2 <-  data.frame(x, y1, y2, y3, y4, y5, y6)
+library(reshape2)
+library(ggplot2)
+data2 <- melt(data2, idvars=c("x"), measure.vars=c("y1","y2","y3","y4", "y5", "y6"))
+plo2 <-  ggplot(data2, aes(x=x, y=value))+
+  geom_point(size =1, color = "lightgreen", alpha=0.8)+
+  facet_wrap(~variable)
+plo2
+```
+
+
+## Déterminer 
+
+1. Existe-t-il une liaison ? 
+2. Est-elle linéaire ?  De quel sens ?
+3. si non linéaire, est-elle monotone ?  De quelle forme ?
+
+## Cas d'une régression linéaire sur deux variables $V_1$ et $V_2$
+ 
+ $R^2 \in [0;1]$ , coefficient de détermination linéaire 
+
+Donne la **qualité de prédiction** de la regression
+ 
+ $\rightarrow$ pourcentage de variation de $V_1$ expliqué par la variation de $V_2$
+
+  carré de la corrélation univariée $cor(V_1,V_2)$ (Pearson)
+  
+  $R^2  = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y})^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}$
+
+
+## Exemples d'application
+
+### Non spatial 
+
+Les variables sont des valeurs attributaires 
+
+### Spatial
+  
+  Individus restreints spatialement (selection spatiale), ou variables de provenance (attributs)
+  
+  quid des **distances** ? $\rightarrow$ modèle gravitaire , réseau etc.
 
 ## Matrice de corrélations 
 
@@ -169,7 +237,7 @@ cor.test(X,Y)$estimate
 
 
 
-## Regression linéaire 
+## Regression linéaire avec R
 
 Fonction  `lm()` , modèle de la forme `réponse ~ termes` 
 
@@ -178,3 +246,9 @@ my_model <- lm(Petal.Width~Petal.Length, iris)
 summary(my_model)
 ```
 
+
+## Lorsque la relaton n'est pas linéaire ?
+
+Quand les deux variables sembles corrélées , de façon monotone mais non linéaire,
+
+$\rightarrow$ Coefficient de **Spearman**, basé sur le **rang** des individus.
