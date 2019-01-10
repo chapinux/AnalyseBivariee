@@ -9,6 +9,8 @@ css : style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,fig.width =6,fig.align="center", fig.height = 3)
+library(knitr)
+library(xtable)
 ```
 
 # Introduction générale 
@@ -110,7 +112,7 @@ Erreur très courrante, très tentante.
 
 
 
-# Lien entre deux variables qualitatives
+# Lien entre deux variables quantitatives
 
 
 
@@ -166,7 +168,7 @@ plo2
 
 1. Existe-t-il une liaison ? 
 2. Est-elle linéaire ?  De quel sens ?
-3. si non linéaire, est-elle monotone ?  De quelle forme ?
+3. Si la liaison est non linéaire, est-elle monotone ?  De quelle forme ?
 
 ## Cas d'une régression linéaire sur deux variables $V_1$ et $V_2$
  
@@ -174,46 +176,79 @@ plo2
 
 Donne la **qualité de prédiction** de la regression
  
- $\rightarrow$ pourcentage de variation de $V_1$ expliqué par la variation de $V_2$
+C'est le pourcentage de variation de $V_1$ expliqué par la variation de $V_2$
 
-  carré de la corrélation univariée $cor(V_1,V_2)$ (Pearson)
+  C'est aussi le carré de la corrélation $cor(V_1,V_2)$ (celle donnée par le $r$ de Pearson)
   
   $R^2  = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y})^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}$
 
 
 ## Exemples d'application
 
-### Non spatial 
+### Données "non spatiales"" 
 
-Les variables sont des valeurs attributaires 
+Les variables sont des valeurs attributaires d'individus, leurs localisation n'est pas prise en compte
 
-### Spatial
+### Données spatiales
   
-  Individus restreints spatialement (selection spatiale), ou variables de provenance (attributs)
+  Individus restreints spatialement (selection spatiale), ou variables de provenance géographique (e.g. Lieu de résidence) renseignées pour les individus 
   
   quid des **distances** ? $\rightarrow$ modèle gravitaire , réseau etc.
 
-## Matrice de corrélations 
+
+## Calcul direct du coefficient de corrélation
+
+Soient deux variables $V_1$ et $V_2$
+
+Le coefficient de corrélation de $V_1$ et $V_2$ est la normalisation de la covariance par le produit des écart-types des variables 
+
+$r= \frac{cov(V_1,V_2)}{\sigma_{V_1}\sigma_{V_2}}$ 
+
+
+La covariance est la moyenne du produit des écarts à la moyenne
+
+$cov(V_1,V_2)= E[(V_1-E[V_1])(V_2-E[V_2])]$
+
+
+
+## Corrélation de deux variables avec R
 
 
 ```{r corIris}
-cor(iris[,1:4])
+cor(iris$Petal.Length, iris$Petal.Width)
 ```
 
-Donne le **coefficient de corrélation** $\in [-1;1]$
+Donne le **coefficient de corrélation** $\in [-1;1]$ entre deux variables numériques.
 
 - +1 : les deux variables croissent ou décroissent conjointement
 - -1 : quand l'une des variables croît, l'autre décroît.
 - 0 : pas de relation **linéaire** entre les deux variables
  
- <font size="3">Coefficient de Pearson par defaut, argument `method` de la fonction `cor()` permet de spécifier deux autres coefficients : Kendall et Spearman.</font>
+ <font size="3">R donne le coefficient de Pearson par defaut, l'argument `method` de la fonction `cor()` permet de spécifier deux autres coefficients : Kendall et Spearman.</font>
 
 
 ## Test de corrélation entre deux variables
 
+Version plus complète : c'est un **test**, on a plusieurs indicateurs statistiques sur ce test, notamment la **p-value** et **l'intervalle de confiance**
+
 ```{r cortestIris}
 cor.test(iris$Petal.Length, iris$Petal.Width)
 ```
+Rappel : la p-value quantifie la **significativité** du test, en général , on considère le test significatif si elle est en dessous de 5%.  
+<font size="3"; line-height=100%>Elle peut s'interpréter comme la probabilité d'avoir un résultat identique tout en conservant l'hypothèse nulle. Ici , l'hypothèse nulle est "les deux séries sont  indépendantes". On peut grossièrement considérer que p-value = pourcentage de chances de se tromper en rejetant l'hypothèse nulle.</font>
+
+## Matrice de corrélations
+
+
+```{r corMatIris}
+cor(iris[,1:4])
+```
+
+Présentations des corrélations entre les variables quantitatives d'un tableau, pour tous les couples de variables.
+
+La matrice de corrélation est symmétrique, et sa diagonale est constituée de 1.
+
+
 
 
 ## Sensibilité aux 'outliers'
@@ -235,6 +270,15 @@ plot(X, Y, xlim = c(0,16), ylim= c(0,16))
 cor.test(X,Y)$estimate
 ```
 
+## Sensibilité aux 'outliers'
+
+Outlier : observation "*anormale*",  par sa valeur extrème , comparée aux autres.
+
+
+La corrélation et la régression linéaire sont très sensibles aux outliers.
+
+$\rightarrow$ s'interroger sur la nécessité de nettoyer/filter les données et des conséquences 
+
 
 
 ## Regression linéaire avec R
@@ -252,3 +296,270 @@ summary(my_model)
 Quand les deux variables sembles corrélées , de façon monotone mais non linéaire,
 
 $\rightarrow$ Coefficient de **Spearman**, basé sur le **rang** des individus.
+
+<center>
+$\rho = 1 - \frac{6\sum_{i=1}^{n}(rg(X_i)-rg(Y_i))^2 }{n^3 -n}$
+</center>
+
+
+avec :
+
+$rg(X_i)$ le *rang* de $X_i$  (le classement de sa valeur) dans la distribution de X
+
+$n$ le nombre d'individus
+
+## Obtenir le coefficient Spearman avec R
+
+
+```{r rho}
+cor.test(iris$Sepal.Length, iris$Sepal.Width, method="spearman", exact = FALSE)
+```
+
+
+l'argument `exact` doit être précisé en cas de valeurs ex aequo dans les données.  
+
+
+## Utilisation conjointe des coefficients de Pearson et Spearman 
+
+$r$ (Pearson) et $\rho$ (Spearman) sont deux moyens d'estimer la corrélation: lequel choisir ?
+
+si $r = \rho$: on garde $r$ (plus simple)
+
+si $r < \rho$: la relation est non-linéaire : prendre  $\rho$
+
+si $r > \rho$: il y a un biais, prendre $\rho$ (plus robuste)
+
+... et toujours *tracer le nuage de points* pour examiner  la nature de la relation.
+
+
+# Lien entre deux variables qualitatives
+
+## Représentation graphique
+
+On ne peut pas produire de nuages de points, ni de droite de régression.
+
+$\rightarrow$ on peut représenter la table de contingence (cf. fonction `mosaicplot` de R).
+
+```{r mosaic, echo=FALSE, fig.height=3}
+library(RColorBrewer)
+mypalette <-  brewer.pal(12,"Set3")
+par(mar=c(0,0,0,0))
+mosaicplot(~Class+Survived, data=Titanic, color=mypalette,main = "")
+``` 
+
+
+## Test statistique dit du "Chi 2"" ou "Chi carré""
+
+Le test du $\chi ^2$ est un test d'indépendance, il mesure l'**écart** entre deux distributions de **variables qualitatives**
+
+Hypothèse nulle $H_0$ : les deux distributions sont indépendantes.
+
+A partir de $H_0$, on génère une **distribution théorique** à laquelle on va comparer la **distribution observée**.
+
+Avec cette comparaison,  on pourra rejeter ou conserver l'hypothèse nulle.
+
+Pour ça , on va construire un **tableau de contingence**, qui donne les effectifs de chaque modalité des deux variables.
+
+
+
+##  Tableau de contingence
+
+C'est un tableau à double entrée qui croise deux **variables qualitatives**. 
+
+
+Dans une case on trouve l'effectif des individus caractérisés par la conjonction des modalités en ligne et en colonnes.
+
+
+Exemple sur des formes géométriques de couleurs :
+
+$$\begin{array}{c|c|c}
+   & blanc & noir \\ 
+   \hline
+carré &  22 &   12 \\ 
+  \hline
+  rond &   10 &  30 \\ 
+    \hline
+  triangle &  26 &   5 \\ 
+\end{array}$$
+
+
+## Construction de la distribution théorique.
+
+On commence par sommer les effectifs selon les modalités (en ligne et en colonne)
+
+$$\begin{array}{c|c|c|c}
+   & blanc & noir & \texttt{total}\\ 
+   \hline
+carré &  22 &   12 & 34\\ 
+  \hline
+  rond &   10 &  30 &  40  \\ 
+    \hline
+  triangle &  26 &   5 &  31\\
+  \hline
+  \texttt{total} & 58 & 47 & 105
+  \end{array}$$
+
+On appelle les sommes en lignes et en colonnes **sommes marginales**, elles sont mises dans les "marges" du tableau.
+
+
+
+## Construction de la distribution théorique
+
+En divisant par la taille de l'effectif, on obtient les **fréquences observées**.
+
+$$\begin{array}{c|c|c|c}
+   & blanc & noir & \texttt{total}\\ 
+   \hline
+carré &  0.20952381&  0.11428571 &  0.3238095\\ 
+  \hline
+  rond &    0.09523810 & 0.28571429 & 0.3809524  \\ 
+    \hline
+  triangle & 0.24761905 & 0.04761905 &   0.2952381\\
+  \hline
+  \texttt{total} &  0.552381 & 0.447619 & 1
+  \end{array}$$
+
+
+On obtient les **pourcentages de l'effectif** dans les cases du tableau.
+
+
+C'est également la **probabilité** dans cette population, qu'un individu soit caractérisé par les modalités en ligne et en colonne.
+
+
+## Construction de la distribution théorique
+
+$$\begin{array}{c|c|c|c}
+   & blanc & noir & \texttt{total}\\ 
+   \hline
+carré &  0.20952381&  0.11428571 &  \textbf{0.3238095}\\ 
+  \hline
+  rond &    0.09523810 & 0.28571429 & \textbf{0.3809524}  \\ 
+    \hline
+  triangle & 0.24761905 & 0.04761905 &   \textbf{0.2952381}\\
+  \hline
+  \texttt{total} &  \textbf{0.552381} & \textbf{0.447619} & 1
+  \end{array}$$
+
+
+De la même façon, les **fréquences marginales**, donnent la **probabilité** d'observer un individu de la modalité correspondant à la ligne ou à la colonne considérée.
+
+<font size="4">
+Exemple : dans cette population , j'ai 29.5% de chances de tirer un triangle
+</font>
+
+## Construction de la distribution théorique
+
+Rappel de probabilités : Probabilité conjointe de deux évènements $A$ et $B$ **indépendants**  
+$P(A \cap B) = P(A) \times P(B)$
+
+A partir des **fréquences marginales** précédentes , on obtient pour chaque couple de modalités la probabilité **théorique**,  celle qui suppose $H_0$, i.e. l'indépendance des deux variables, par un simple produit.
+
+<font size="4">
+Exemple :  Si $H_0$ est vraie, la probabilité d'observer un triangle noir est donnée par: 
+
+$P(triangle \cap noir) = P(triangle) \times P(noir)$
+
+$P(triangle \cap noir) =0.447619 \times 0.2952381  = 0.1321542$
+
+La probabilité théorique d'observer un triangle noir est de 13,2%  
+</font>
+
+## Construction de la distribution théorique
+
+On crée un second tableau, dont chaque case vaut le produit des fréquences marginales calculées sur le tableau des observations.
+
+$$\begin{array}{c|c|c|c}
+   & blanc & noir & \texttt{total}\\ 
+   \hline
+carré &  0.1788662 &   0.1449433 &  \textbf{0.3238095}\\ 
+  \hline
+  rond &    0.2104309 &0.1705215 & \textbf{0.3809524}  \\ 
+    \hline
+  triangle &  0.1630839 & 0.1321542 &   \textbf{0.2952381}\\
+  \hline
+  \texttt{total} &  \textbf{0.552381} & \textbf{0.447619} & 1
+  \end{array}$$
+
+C'est le tableau des fréquences théoriques.
+
+
+## Tableau des effectifs théoriques
+
+On l'obtient en multipliant les fréquences théoriques par la taille de la population observée (ici 105)
+
+
+$$\begin{array}{c|c|c}
+   & blanc & noir \\ 
+   \hline
+carré &  18.78095 &  15.21905 \\ 
+  \hline
+  rond &   22.09524 & 17.90476    \\ 
+    \hline
+  triangle & 17.12381 & 13.87619   \\
+  \end{array}$$
+
+<font size="4">
+N.B. Il n'est pas nécessaire d'arrondir les effectifs théoriques
+</font>
+
+
+## Calcul du Chi 2
+
+
+On obtient le $\chi^2$ en faisant la somme, pour chaque case du tableau de contingence,  des écarts carrés entre  effectif observé et effectif théorique, divisés par l'effectif théorique.
+
+Soient $T^{obs}$ le tableau des effectifs observés, $T^{theo}$ le tableau des effectifs théoriques
+
+$\chi^2 =  \sum_{i,j}  \frac{( T^{obs}_{i,j} -  T^{obs}_{i,j})^2}{T^{obs}_{i,j}}  $       
+
+
+ici : $\chi^2 = 26.30329$
+
+
+## Interprétation du Chi 2 
+
+Il faut comparé la valeur du $\chi^2$ calculée avec la **valeur critique** qu'on trouve   dans une **table de loi de Student** (ou table de loi du chi 2).
+
+C'est un tableau à double entrée : une **valeur de quantile**, et un **degré de liberté**.
+
+On peut considérer que la valeur de quantile est le pourcentage d'erreur qu'on s'autorise de faire.  On prend souvent 5% :  la colonne 1-0.05 =  0.95
+
+Le degré de liberté est obtenu en calculant la valeur $(nb\_lignes - 1)*(nb\_colonnes -1) $.
+
+Dans notre exemple , le degré de liberté est 2*1 = 2
+
+
+## Table de loi de Student 
+
+<center>
+<img src="table.loi.de.student.png", width=100%></img>
+</center>
+
+
+## Interprétation du Chi 2 
+
+
+D'après le tableau de la loi de Student , la valeur critique pour un test avec 5% de chances de se tromper est un degré de liberté de 2 vaut 4.303.
+
+Si la valeur calculée du $\chi^2$ est **supérieure** à la valeur critique, on conserve $H_0$.
+
+
+
+Pour notre exemple: "Les deux variables sont indépendantes, la forme n'est pas liée à la couleur dans cette population, nous pouvons l'affirmer avec un risque d'erreur à 5%"  
+
+
+
+# Lien entre une variable qualitative et une variable quantitative.
+
+
+## Représentation graphique.
+
+
+"Boîte à moustaches", aussi appellées "boxplot", montre les quartiles d'une variables quantitatives en fonction des modalités d'une variable qualitative.
+
+
+
+
+
+
+
