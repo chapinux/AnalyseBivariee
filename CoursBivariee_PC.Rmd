@@ -188,7 +188,7 @@ plo2
 5. Si la liaison est non linéaire, est-elle monotone ?  De forme connue ?$\rightarrow$  Proposer un **modèle**
 
 
-5bis. Tenter un modèle **LOESS** avec prudence (uniquement descriptif , aucun pouvoir de généralisation)
+5bis. Tenter un modèle **LOESS** avec prudence (uniquement descriptif , aucun pouvoir de généralisation) cf le blog de Lise Vaudor [http://perso.ens-lyon.fr/lise.vaudor/regression-loess/]
 
 ## Régression linéaire 
  
