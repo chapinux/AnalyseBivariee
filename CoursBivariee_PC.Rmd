@@ -1,7 +1,7 @@
 ---
-title: "Analyse Bivariée (avec R)"
+title: "Analyse Bivariée "
 author: "PC"
-date: "26 novembre 2018"
+date: '`r format(Sys.Date(), " %d %B  %Y")`'
 output: ioslides_presentation
 css : style.css
 ---
@@ -15,31 +15,34 @@ library(xtable)
 
 # Introduction générale 
 
-## Reférences
+## Sources et Reférences
 
-- Cours M2 IGAST 2017 d'Élodie Buard 
+- Ce cours reprend le cheminement du cours M2 IGAST 2017 d'Élodie Buard 
 - R et espace https://framabook.org/r-et-espace/
 - Probabilités, analyse de données et statistiques , Gilbert Saporta, Editions TECHNIP, 2011
 - Nombreuses ressources en ligne : 
    http://www.foad-mooc.auf.org/IMG/pdf/424B_-Application_des_methodes_statistiques_d_analyse.pdf
+- et wikipedia !
 
 ## Deux familles statistiques
 
-### Statistiques inférentielles
-  A partir d'un échantillon , que peut-on attendre (inférer) de la population ?
+### Statistiques **inférentielles**
+  Pour répondre à la question : «A partir d'un échantillon , que peut-on attendre (inférer) de la population ?»
   
-  - Modèles, estimateurs, ... : **régression** , **estimation**, **extrapolation**
-  - e.g. sondages, rencensement 
-
-## Deux familles statistiques
-  
-### Statistiques descriptives 
-  Pour décrire, résumer, synthétiser  les propriétés d'une **population** à partir de ses **individus** et des **variables** qui les décrivent.
-  
-  - Graphiques
-  - Mesures (fréquences , distributions , moments)
+  - Modèles, estimateurs, ... : **régression**, **estimation**, **extrapolation**
   - *Liaisons* statistiques : **corrélation**, **covariance**
-  - classification , ACP,...
+  - test statistiques, notions de probabilités
+  - e.g. sondages, rencensement, intervalle de confiance , prédictions, ...
+
+## Deux familles statistiques
+  
+### Statistiques **descriptives** 
+
+  Pour **résumer**, **synthétiser**, rendre intelligible, les propriétés d'une **population** à partir des **variables** qui décrivent les individus et la **répartition** de leurs valeurs.
+  
+  - Graphiques (histogrammes, boxplots, )
+  - Mesures (fréquences , distributions , moments)
+  - classification, ACP,...
 
 ## Vocabulaire 
  
@@ -48,8 +51,8 @@ library(xtable)
  
  "données", "corpus", "échantillon", "data"
  
-### Individus
- Unité statistique **élémentaire**: personnes, logements, ...
+### Individu
+ Unité statistique **élémentaire**: un individu, 
  
  
  "les lignes du tableau"
@@ -57,13 +60,13 @@ library(xtable)
 ## Vocabulaire 
 
 ### Variables 
- **Caractéristiques, propriétés** d’un individu, mesurées par des enquêtes, des observations...
+ **Caractéristiques, propriétés** d’un individu, __mesurées__ par des enquêtes, des observations...
 
 "les colonnes du tableau"  
 
-- **Qualitatives** : facteurs e.g. Sexe, CSP, type , notion de **modalité**
+- **Qualitatives** : facteurs, classes , catégories,  e.g. Sexe, CSP, type ; on parle de **modalité**
  
-- **Quantitatives** : nombres e.g. Taille, revenu, surface
+- **Quantitatives** : nombres e.g. Âge, taille, revenu, surface
 
 
 
@@ -79,32 +82,37 @@ library(xtable)
 
 
 
-## Analyse bivariée
+## L'objet du cours : l' Analyse Bivariée
 
-**Analyser**  le **lien** entre deux variables
-
+Objectif : **Analyser**  le **lien** entre deux variables
 
 - **2 variables quantitatives**
 
+<font size=4>
 "nombre d'habitants et nombre de lignes de bus  par département"
 
-"nombre de lignes de bus en 1998 et en 2018"  (stabilité ?)
+"nombre de lignes de bus en 1998 et en 2018"  
+</font>
 
 - **2 variables qualitatives** 
 
- "couleur des yeux  et port de lunettes" <span style="color:red; font-size:80%">(&#9888; comparable?)</span>
+<font size=4>
+"couleur des yeux  et port de lunettes" 
+</font>
 
 - **Une variable quantitative, une variable qualitative** 
 
-"taille et couleur des yeux"  <span style="color:red; font-size:80%">(&#9888; comparable?)</span>
-
+<font size=4>
+"taille et couleur des yeux"  
+</font>
 
 
 ## Mise en garde
 
-Une liaison, même très forte, entre deux variables, <span style="color:red">n'indique pas la causalité!</span>
+<span style="color:red; font-size:100%">&#9888; </span> Une liaison, même très forte, entre deux variables, <span style="color:red">n'indique pas la causalité! &#9888;</span>
 
 Erreur très courrante, très tentante.
+
 <center>
 <img src="chart.svg", width=100%></img>
 </center>
@@ -112,35 +120,40 @@ Erreur très courrante, très tentante.
 
 
 
+
+## Analyse bivariée avec des données spatiales
+
+### Données "non spatiales"" 
+
+Les variables sont des valeurs attributaires d'individus, leurs localisation n'est pas prise en compte
+
+### Données spatiales
+  
+  Individus restreints spatialement (selection spatiale), ou variables de provenance géographique (e.g. Lieu de résidence) renseignées pour les individus 
+  
+  quid des **distances** ? $\rightarrow$ modèle gravitaire , réseau etc.
+
+### Données localisées
+
+  Auto-corrélation spatiale (Moran's I)
+  Geographicaly Weightd Regression (GWR)
+
+
 # Lien entre deux variables quantitatives
 
 
 
-## Premier réflexe à avoir  
-Regarder l'aspect des données avec des graphiques (exploration)
+## Première étape   
 
-```{r plotIris}
+<span style="color:red">Toujours en premier:</span> Regarder l'aspect des données avec des graphiques ("exploration visuelle") 
+
+```{r plotIris, fig.width=8}
 data(iris)
 plot(iris)
 ```
 
+Existe-t-il un lien entre des variables ?
 
-
-## Deuxième étape 
-
-Calcul d'un **indicateur** représentant ce lien: une **droite de régression** sur le nuage de points, qui donne: 
-
-* l'**intensité** du lien / de la dépendance  : points proche de la droite ou non ?
-* la **forme** de la dépendance : linéaire ou non ?
-* le **sens** de la dépendance  : nulle, positive ou négative ?
-```{r regline, echo=FALSE}
-library(ggplot2)
-data <-  data.frame(X=c(1,2,3,5,6,7,12,14,22, 2,3 ),Y=c(15,16,13, 9,9,12,3,2,5,11,12))
-plo <-  ggplot(data, aes(x=X, y=Y))+
-  geom_point()+
-  geom_smooth(method="lm", se=FALSE) 
-plo
-```
 
 
 ## Forme des dépendances 
@@ -158,67 +171,205 @@ library(reshape2)
 library(ggplot2)
 data2 <- melt(data2, idvars=c("x"), measure.vars=c("y1","y2","y3","y4", "y5", "y6"))
 plo2 <-  ggplot(data2, aes(x=x, y=value))+
-  geom_point(size =1, color = "lightgreen", alpha=0.8)+
-  facet_wrap(~variable)
+  geom_point(size =1, color = "#0FAF96", alpha=0.8)+
+  facet_wrap(~variable)+
+  xlab("value of x variable")+
+  ylab("value of yi variable")
+  
 plo2
 ```
 
 
-## Déterminer 
+## Les étapes
+1. Tracer le nuage de points
+2. Existe-t-il une liaison ? 
+3. Est-elle de forme linéaire ?  De quel sens ?
+4. Si la liaison est de forme linéaire $\rightarrow$ faire une **régression** 
+5. Si la liaison est non linéaire, est-elle monotone ?  De forme connue ?$\rightarrow$  Proposer un **modèle**
 
-1. Existe-t-il une liaison ? 
-2. Est-elle linéaire ?  De quel sens ?
-3. Si la liaison est non linéaire, est-elle monotone ?  De quelle forme ?
 
-## Cas d'une régression linéaire sur deux variables $V_1$ et $V_2$
+5bis. Tenter un modèle **LOESS** avec prudence (uniquement descriptif , aucun pouvoir de généralisation)
+
+## Régression linéaire 
  
- $R^2 \in [0;1]$ , coefficient de détermination linéaire 
-
-Donne la **qualité de prédiction** de la regression
+Si la forme du nuage de points s'y prête, on peut faire une **régression linéaire** (ou **ajustement** linéaire).
  
-C'est le pourcentage de variation de $V_1$ expliqué par la variation de $V_2$
+On cherche la droite qui «passe au mieux» (=*ajustée*) dans le nuage de points formés par le tracé de deux variables quantitatives $Var1$ et $Var2$ qui permet de vsiualiser: 
 
-  C'est aussi le carré de la corrélation $cor(V_1,V_2)$ (celle donnée par le $r$ de Pearson)
+* l'**intensité** du lien / de la dépendance  : points proche de la droite ou non ?
+* la **forme** de la dépendance : linéaire ou non ?
+* le **sens** de la dépendance  : nulle, positive ou négative ?
+
+## Régression linéaire 
+
+```{r regline, echo=FALSE, fig.width=6, fig.height=4}
+library(ggplot2)
+data <-  data.frame(X=c(1,2,3,5,6,7,12,14,22, 2,3 ,10,10,9,7),Y=c(15,16,13, 9,9,12,3,2,5,11,12,7,8,9,8))
+plo <-  ggplot(data, aes(x=X, y=Y))+
+  geom_point()+
+  geom_smooth(method="lm", se=FALSE)+
+  xlab("Var1")+
+  ylab("Var2")
+plo
+```
+
+ 
+ 
+«Droite qui passe au mieux»  = qui minimise la **somme des écarts quadratiques** entre la droite et les points du nuage.
+
+
+
+
+ 
+## Régression linéaire : le modèle
+ 
+
+L'**équation** de la droite  est un **modèle linéaire** de la relation statistique qui lie $V1$ et $V2$; on dit que $V1$ **explique** $V2$ :
+
+Notre modèle : 
+<center>
+$V2=aV1+b$
+</center>
+
+ 
+\
+
+Si la régression linéaire est correcte, alors pour un individu $i$ dont on connait $V1_i$, on infère la valeur $V2_i$ par le modèle :    $V2_i = a \times V1_i +b$
+ 
+ 
+  $\implies$Comment déterminer qu'une régression linéaire est «correcte» ? 
+ 
+## le $R^2$
+ 
+ $R^2 \in [0;1]$ , coefficient de détermination linéaire .
+
+Donne la **qualité de prédiction** de la régression. 
+
+"Proche de 1"" $\equiv$ "très bonne qualité"
+ 
+C'est le pourcentage de variation de $V_2$ expliqué par la variation de $V_1$
+
+C'est aussi le carré de la corrélation $cor(V_1,V_2)$ (celle donnée par le $r$ de Pearson)
   
   $R^2  = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y})^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}$
 
 
-## Exemples d'application
+## Format des resultats de `lm` avec R
 
-### Données "non spatiales"" 
+```{r reslm,fig.width=6, fig.height=4}
+summary(lm(iris$Petal.Length~iris$Petal.Width))
+```
 
-Les variables sont des valeurs attributaires d'individus, leurs localisation n'est pas prise en compte
-
-### Données spatiales
-  
-  Individus restreints spatialement (selection spatiale), ou variables de provenance géographique (e.g. Lieu de résidence) renseignées pour les individus 
-  
-  quid des **distances** ? $\rightarrow$ modèle gravitaire , réseau etc.
+Distribution des résidus, coefficients du modèle ajusté et leur **p-value** associée (ici sur un test de Student, notée `Pr(>|t|)` et  $R^2$) 
 
 
-## Calcul direct du coefficient de corrélation
+## Comment evaluer la "validité" du modèle linaire ?
 
-Soient deux variables $V_1$ et $V_2$
+En pratique, il faut réunir deux critères : 
 
-Le coefficient de corrélation de $V_1$ et $V_2$ est la normalisation de la covariance par le produit des écart-types des variables 
+- des coefficients avec des p-values associées faibles (e.g. <0.05)  $\leftrightarrow$ "on a peu de chances de se tromper"
+- un $R^2$ élevé  $\leftrightarrow$ "le modèle prédit bien les observations"
 
-$r= \frac{cov(V_1,V_2)}{\sigma_{V_1}\sigma_{V_2}}$ 
+
+## la p-value
+
+Elle peut s'interpréter comme la probabilité d'avoir un résultat identique tout en conservant l'hypothèse nulle. 
+
+Ici , l'hypothèse nulle est "les deux séries sont indépendantes". 
+
+On peut grossièrement considérer que p-value = pourcentage de chances de se tromper en rejetant l'hypothèse nulle, c'est à dire en considérant que  les deux séries ne sont pas indépendantes et qu'il existe une relation (ici, linéaire car nous testons le coefficient de coorélation linéaire) entre les deux.
 
 
-La covariance est la moyenne du produit des écarts à la moyenne
+Rappel : 
+  - conserver $H_0$ : considérer les deux variables comme indépendantes
+  - rejeter $H_0$ : considérer les deux variables comme ayant une relation statistique, un lien.
 
-$cov(V_1,V_2)= E[(V_1-E[V_1])(V_2-E[V_2])]$
+
+
+## Bonus: Critères de significativité du lien linéaire 
+
+Les **résidus** $\epsilon_i$ (écart entre valeur observée et valeur prédite  par le modèle pour l'individu $i$) doivent:
+
+- être indépendants  : $cov(x_i, \epsilon_i) = 0$
+- être distribués selon un loi normale de moyenne nulle $\mathscr{N}(0,\sigma_{\epsilon})$
+- être distribués de façon homogène (homoscédasticité), i.e. de variance constante $var(\epsilon_i)=\sigma_{\epsilon}^2$ , indépendante de l'observation
+
+
+
+## Bonus: Evaluation de l'indépendance des résidus avec R 
+
+Graphique de la fonction `acf`:  Si une barre exceptée la première dépasse  la ligne en pointillés, on peut remettre en cause l'indépendance des résidus. Ici, c'est le cas.
+
+```{r residualSigni3,fig.width=6, fig.height=4}
+modele1 <- lm(iris$Petal.Length~ iris$Petal.Width)
+acf(residuals(modele1))
+```
+
+
+
+ 
+
+
+## Bonus:Les 4 graphiques résultats de la fonction `lm`
+
+
+La fonction `lm` de R et ses résultats permettent de tracer 4 graphiques pour évaluer certains des critères de significativité.
+
+
+```{r residualSignif,fig.width=6, fig.height=4, cache=T}
+modele1 <- lm(iris$Petal.Length~ iris$Petal.Width)
+par(mfrow=c(2,2)) # pour avoir une matrice de grpahes
+plot(modele1)
+```
+
+
+
+## Bonus: Évaluer l'homogénéité des résidus avec R
+
+Premier graphique : pour vérifier que le nuage de points est homogène (e.g. pas de relation non-linéaire entre résidus et valeurs prédites)
+
+Une éventuelle relation non-linéaire pourrait se retrouver dans les résidus.
+
+```{r residualSignif1,fig.width=6, fig.height=3, cache=T}
+modele1 <- lm(iris$Petal.Length~ iris$Petal.Width)
+plot(modele1,1)
+```
+
+Ici : légère structure parabolique 
+
+## Bonus: Evaluer la normalité de la distribution des résidus avec R
+
+Le deuxième graphique "Q-Q plot" : pour vérifier l'**hypothèse de normalité des résidus**, les points doivent être proches de la bissectrice  
+
+
+```{r residualSignif2,fig.width=6, fig.height=4, cache=T}
+modele1 <- lm(iris$Petal.Length~ iris$Petal.Width)
+plot(modele1,2)
+```
+
+
+
+
+## Bonus: Evaluer l'homoscédasticité des résidus 
+
+<span style="font-size:18px;"> Le troisème graphique "Scale location" : si les résidus sont distribués de façon homogène suivant les valeurs "fittées",  alors la droite est plutôt horizontale et les points sont disposés de façon homogène autour.</span>
+
+```{r residualSignif3,fig.width=6, fig.height=2.5, cache=T}
+modele1 <- lm(iris$Petal.Length~ iris$Petal.Width)
+plot(modele1,3)
+```
+
+<span style="font-size:18px;">Ici: légère pente mais les points sont distribués de façon relativement homogène autour de la droite.</span>
 
 
 
 ## Corrélation de deux variables avec R
-
-
+Pour étudier l'intensité d'un lien statistique linéaire entre 2 variables
 ```{r corIris}
 cor(iris$Petal.Length, iris$Petal.Width)
 ```
 
-Donne le **coefficient de corrélation** $\in [-1;1]$ entre deux variables numériques.
+`cor(x,y)` donne le **coefficient de corrélation** $\in [-1;1]$ entre deux variables x et y (e.g. colonnes d'un dataframe) .
 
 - +1 : les deux variables croissent ou décroissent conjointement
 - -1 : quand l'une des variables croît, l'autre décroît.
@@ -227,15 +378,35 @@ Donne le **coefficient de corrélation** $\in [-1;1]$ entre deux variables numé
  <font size="3">R donne le coefficient de Pearson par defaut, l'argument `method` de la fonction `cor()` permet de spécifier deux autres coefficients : Kendall et Spearman.</font>
 
 
-## Test de corrélation entre deux variables
+## Test de corrélation entre deux variables avec R
 
 Version plus complète : c'est un **test**, on a plusieurs indicateurs statistiques sur ce test, notamment la **p-value** et **l'intervalle de confiance**
 
 ```{r cortestIris}
 cor.test(iris$Petal.Length, iris$Petal.Width)
 ```
-Rappel : la p-value quantifie la **significativité** du test, en général , on considère le test significatif si elle est en dessous de 5%.  
-<font size="3"; line-height=100%>Elle peut s'interpréter comme la probabilité d'avoir un résultat identique tout en conservant l'hypothèse nulle. Ici , l'hypothèse nulle est "les deux séries sont  indépendantes". On peut grossièrement considérer que p-value = pourcentage de chances de se tromper en rejetant l'hypothèse nulle.</font>
+Rappel : la p-value quantifie la **significativité** du test.
+En général, on considère le test significatif si elle est en dessous de 5%, soit 0.05.  
+
+
+## Calcul direct du coefficient de corrélation
+
+Soient deux variables $V_1$ et $V_2$
+
+Le coefficient de corrélation $r$ de $V_1$ et $V_2$ est la normalisation de la covariance par le produit des écart-types des variables 
+
+$r= \frac{cov(V_1,V_2)}{\sigma_{V_1}\sigma_{V_2}}$ 
+
+
+
+
+Rappel : La covariance est la moyenne du produit des écarts à la moyenne
+
+$cov(V_1,V_2)= E[(V_1-E[V_1])(V_2-E[V_2])]$
+
+
+
+
 
 ## Matrice de corrélations
 
@@ -244,7 +415,7 @@ Rappel : la p-value quantifie la **significativité** du test, en général , on
 cor(iris[,1:4])
 ```
 
-Présentations des corrélations entre les variables quantitatives d'un tableau, pour tous les couples de variables.
+Présentation des corrélations entre les variables quantitatives d'un tableau, pour tous les couples de variables.
 
 La matrice de corrélation est symmétrique, et sa diagonale est constituée de 1.
 
@@ -291,9 +462,9 @@ summary(my_model)
 ```
 
 
-## Lorsque la relaton n'est pas linéaire ?
+## Que faire lorsque la relation n'est pas linéaire ?
 
-Quand les deux variables sembles corrélées , de façon monotone mais non linéaire,
+Quand les deux variables sembles corrélées , de façon **monotone** mais **non linéaire**,
 
 $\rightarrow$ Coefficient de **Spearman**, basé sur le **rang** des individus.
 
@@ -304,7 +475,7 @@ $\rho = 1 - \frac{6\sum_{i=1}^{n}(rg(X_i)-rg(Y_i))^2 }{n^3 -n}$
 
 avec :
 
-$rg(X_i)$ le *rang* de $X_i$  (le classement de sa valeur) dans la distribution de X
+$rg(X_i)$ le *rang* de $X_i$  (le classement de sa valeur) dans la distribution de $X$
 
 $n$ le nombre d'individus
 
@@ -329,14 +500,95 @@ si $r < \rho$: la relation est non-linéaire : prendre  $\rho$
 
 si $r > \rho$: il y a un biais, prendre $\rho$ (plus robuste)
 
-... et toujours *tracer le nuage de points* pour examiner  la nature de la relation.
+... et toujours **tracer le nuage de points** pour examiner  la nature de la relation.
 
+
+# Linéariser des relations non-linéaires
+
+
+## Relation log-linéaire 
+
+```{r loglin, echo=FALSE, fig.width= 8, fig.height=4, cache=T}
+x <- runif(1000, min = 0, max=10)
+y1 <- 1.5*x^2.2  + rnorm(1000,10, 12)
+data2 <-  data.frame(x, y1)
+library(ggplot2)
+plo2 <-  ggplot(data2, aes(x=x, y=y1))+
+  geom_point(size =1, color = "#0FAF96", alpha=0.8)+
+  xlab(" x ")+
+  ylab(" y ")
+plo2
+```
+
+
+Relation de type $y=ax^b$ 
+
+se linéarise par $ln(y)=aln(x) + ln(b)$
+
+
+
+## Relation géométrique (exponentielle) 
+
+```{r expolin, echo=FALSE, fig.width= 8, fig.height=4, cache=T}
+x <- runif(1000, min = 0, max=10)
+y1 <- exp(1.5*x+ 0.2)  + 10000*rnorm(1000,10, 12)
+data2 <-  data.frame(x, y1)
+library(ggplot2)
+plo2 <-  ggplot(data2, aes(x=x, y=y1))+
+  geom_point(size =1, color = "#0FAF96", alpha=0.8)+
+  xlab(" x ")+
+  ylab(" y ")
+plo2
+```
+
+
+Relation de type $y=e^{ax+b}$ 
+
+se linéarise par $ln(y)=ax + ln(b)$
+
+## Relation logarithmique
+
+```{r logar, echo=FALSE, fig.width= 8, fig.height=4, cache=T}
+x <- runif(1000, min = 0, max=10)
+y1 <- 1.5*log(x)+ 0.2  + 0.22*rnorm(1000,1, 2)
+data2 <-  data.frame(x, y1)
+library(ggplot2)
+plo2 <-  ggplot(data2, aes(x=x, y=y1))+
+  geom_point(size =1, color = "#0FAF96", alpha=0.8)+
+  xlab(" x ")+
+  ylab(" y ")
+plo2
+```
+
+Relation de type $y=a*ln(x)+b$ 
+
+$\rightarrow$ changement de variable !
+
+## Relation logistique
+
+```{r logistic, echo=FALSE, fig.width= 8, fig.height=4, cache=T}
+x <- runif(1000, min = 0, max=10)
+ymax <-  10
+ymin <- 0
+y1 <- ymin+ ((ymax -ymin) /(1 + exp(-1.5*x+6.8))) + 0.5*rnorm(1000,1,1)
+data2 <-  data.frame(x, y1)
+library(ggplot2)
+plo2 <-  ggplot(data2, aes(x=x, y=y1))+
+  geom_point(size =1, color = "#0FAF96", alpha=0.8)+
+  xlab(" x ")+
+  ylab(" y ")
+plo2
+```
+
+Relation de type $y= y_{min} * \frac{y_{max}-y_{min}}{1+e^{ax+b}}$
+
+se linéarise par $ln\bigg(\frac{y_{max}-y}{y-y_{min}}\bigg)=ax+b$
 
 # Lien entre deux variables qualitatives
 
 ## Représentation graphique
 
-On ne peut pas produire de nuages de points, ni de droite de régression.
+Pour deux variables qualitatives, on ne peut pas produire de nuages de points, ni de droite de régression.
 
 $\rightarrow$ on peut représenter la table de contingence (cf. fonction `mosaicplot` de R).
 
@@ -350,16 +602,25 @@ mosaicplot(~Class+Survived, data=Titanic, color=mypalette,main = "")
 
 ## Test statistique dit du "Chi 2"" ou "Chi carré""
 
-Le test du $\chi ^2$ est un test d'indépendance, il mesure l'**écart** entre deux distributions de **variables qualitatives**
+Le test du $\chi ^2$ est un test d'indépendance, il mesure l'**écart**, la différence,  entre deux distributions de **variables qualitatives**  
 
-Hypothèse nulle $H_0$ : les deux distributions sont indépendantes.
+Il répond à la question : "Existe-t-il un lien statistique entre deux séries de valeurs qualitatives"  
 
-A partir de $H_0$, on génère une **distribution théorique** à laquelle on va comparer la **distribution observée**.
+(La réponse est de type  OUI/NON , le $\chi^2$ ne donne pas l'**intensité** du lien)
 
-Avec cette comparaison,  on pourra rejeter ou conserver l'hypothèse nulle.
 
-Pour ça , on va construire un **tableau de contingence**, qui donne les effectifs de chaque modalité des deux variables.
+## Test statistique dit du "Chi 2"" ou "Chi carré""
 
+- Hypothèse nulle $H_0$ : les deux distributions sont indépendantes.
+- «faire le test» permet de conserver ou de rejeter cette hypothèse
+
+Principe: 
+
+- On génère une **distribution théorique** à laquelle on va comparer la **distribution observée**.
+- Cette distribution théorique reflête ce qui se passerait si on suppose que $H_0$ est vraie 
+- Avec cette comparaison,  on pourra rejeter ou conserver l'hypothèse nulle.
+
+La construction de cette distribution se fait à partir du **tableau de contingence**
 
 
 ##  Tableau de contingence
@@ -382,6 +643,8 @@ carré &  22 &   12 \\
   triangle &  26 &   5 \\ 
 \end{array}$$
 
+
+Dans R : fonction `table`
 
 ## Construction de la distribution théorique.
 
@@ -449,10 +712,10 @@ Exemple : dans cette population , j'ai 29.5% de chances de tirer un triangle
 
 ## Construction de la distribution théorique
 
-Rappel de probabilités : Probabilité conjointe de deux évènements $A$ et $B$ **indépendants**  
+Rappel : Probabilité conjointe de deux évènements $A$ et $B$ **indépendants**  
 $P(A \cap B) = P(A) \times P(B)$
 
-A partir des **fréquences marginales** précédentes , on obtient pour chaque couple de modalités la probabilité **théorique**,  celle qui suppose $H_0$, i.e. l'indépendance des deux variables, par un simple produit.
+A partir des **fréquences marginales** précédentes, on obtient pour chaque couple de modalités la probabilité **théorique**,  celle qui suppose $H_0$, i.e. l'indépendance des deux variables, par un simple produit.
 
 <font size="4">
 Exemple :  Si $H_0$ est vraie, la probabilité d'observer un triangle noir est donnée par: 
@@ -480,7 +743,7 @@ carré &  0.1788662 &   0.1449433 &  \textbf{0.3238095}\\
   \texttt{total} &  \textbf{0.552381} & \textbf{0.447619} & 1
   \end{array}$$
 
-C'est le tableau des fréquences théoriques.
+C'est le tableau des **fréquences théoriques**.
 
 
 ## Tableau des effectifs théoriques
@@ -506,12 +769,14 @@ N.B. Il n'est pas nécessaire d'arrondir les effectifs théoriques
 ## Calcul du Chi 2
 
 
-On obtient le $\chi^2$ en faisant la somme, pour chaque case du tableau de contingence,  des écarts carrés entre  effectif observé et effectif théorique, divisés par l'effectif théorique.
+C'est la somme, pour chaque case du tableau de contingence,  des écarts carrés entre  effectif observé et effectif théorique, divisés par l'effectif théorique.
 
-Soient $T^{obs}$ le tableau des effectifs observés, $T^{theo}$ le tableau des effectifs théoriques
+Soient $T^{obs}$ le tableau des effectifs observés, $T^{theo}$ le tableau des effectifs théoriques, 
 
-$\chi^2 =  \sum_{i,j}  \frac{( T^{obs}_{i,j} -  T^{obs}_{i,j})^2}{T^{obs}_{i,j}}  $       
 
+<center>
+$\chi^2 =  \sum_{i,j}  \frac{( T^{obs}_{i,j} -  T^{theo}_{i,j})^2}{T^{obs}_{i,j}}$       
+</center>
 
 ici : $\chi^2 = 26.30329$
 
@@ -522,9 +787,9 @@ Il faut comparé la valeur du $\chi^2$ calculée avec la **valeur critique** qu'
 
 C'est un tableau à double entrée : une **valeur de quantile**, et un **degré de liberté**.
 
-On peut considérer que la valeur de quantile est le pourcentage d'erreur qu'on s'autorise de faire.  On prend souvent 5% :  la colonne 1-0.05 =  0.95
+On peut considérer que la valeur de quantile est le pourcentage d'erreur qu'on s'autorise de faire.  On prend souvent **5%** :  la colonne 1-0.05 =  0.95
 
-Le degré de liberté est obtenu en calculant la valeur $(nb\_lignes - 1)*(nb\_colonnes -1) $.
+Le degré de liberté est obtenu en calculant la valeur $(nb\_lignes - 1)*(nb\_colonnes -1)$.
 
 Dans notre exemple , le degré de liberté est 2*1 = 2
 
@@ -545,7 +810,20 @@ Si la valeur calculée du $\chi^2$ est **supérieure** à la valeur critique, on
 
 
 
-Pour notre exemple: "Les deux variables sont indépendantes, la forme n'est pas liée à la couleur dans cette population, nous pouvons l'affirmer avec un risque d'erreur à 5%"  
+Pour notre exemple: On conserve $H_0$, i.e. les deux variables sont **indépendantes**,  car $\chi ^2 \approx 26 > 4.303$
+
+Interprétation: «la forme n'est pas liée à la couleur dans cette population, nous pouvons l'affirmer avec un risque d'erreur à 5%»
+
+
+## Les étapes du $\chi ^2$
+
+- Tableau de contingence
+- Sommes marginales 
+    - Calcul des fréquences observées 
+    - Calcul des fréquences théoriques
+- Tableau d'effectifs théoriques
+- Calcul de la valeur du test 
+- Comparaison avec les valeurs de la table de Student 
 
 
 
@@ -554,12 +832,98 @@ Pour notre exemple: "Les deux variables sont indépendantes, la forme n'est pas 
 
 ## Représentation graphique.
 
+Pas de moyen **simple** de calculer le lien entre une variable qualitative et une variable quantitative.
+  
+  - corrélation de rang 
+  - régression logistique 
+  - analyse de la variance (ANOVA)
+  
 
-"Boîte à moustaches", aussi appellées "boxplot", montre les quartiles d'une variables quantitatives en fonction des modalités d'une variable qualitative.
+La variable qualitative sert de **catégorie**, on fait varier la représentation graphique de la variable quantitative suivant cette catégorie.
+
+2 possibilités :
+
+  - boîtes à moustaches
+  - superposition d' histogrammes / densités 
+
+## Les boîtes à moustaches 
+
+"Boîte à moustaches", aussi appellées "boxplot", montre les quartiles d'une variable
+
+Quartile = «quantile de 4», valeurs qui séparent une variable quantitative en quarts, i.e. paquets d'un quart de l'effectif
+
+- Premier quartile : sépare les 25% inférieurs des valeurs
+- Second quartile : **mediane**, sépare les 50% inférieurs des valeurs
+- troisième quartile : sépare les 75% inférieurs des valeurs
+
+
+Dans R, fonction `quantile` 
+
+## Boxplot et Distribution
+
+
+```{r, echo=FALSE, cache=TRUE, warning=FALSE, fig.width=8, fig.height=6}
+library(ggplot2)
+library(cowplot)
+
+
+n <-  4000
+xval <-  rbeta(n, shape1 = 2, shape2 = 5) * 1000
+mydf <-  data.frame(x=xval)
+xmean <-  mean(xval)
+xsd <-  sd(xval)
+
+xlabels <- data.frame(
+  x = c(quantile(mydf$x)),
+  y = c(rep(330,5) ),
+  text = paste0(c("","Q1: ", "Q2: ", "Q3: ", ""),names(quantile(mydf$x)))
+)
+distriPlot <-  ggplot(mydf, aes(x=x))+
+  geom_histogram(bins = 50, fill="#0FAF96", color="grey")+
+  geom_vline(data = xlabels, xintercept = xlabels$x, linetype=c(2,2,1,2,2))+
+  geom_label(data= xlabels, aes(x=x,y=y,label=text) )+
+  xlab("X")+
+  ylab("Effectif")
+
+# Marginal density plot of x (top panel) and y (right panel)
+yplot <- ggplot(mydf, aes(y = xval))+
+  geom_boxplot(outlier.alpha = 0.2)+
+  coord_flip()+
+  xlab("")+
+  ylab("")+
+  theme_void()
+
+#assemblage
+plot_grid(yplot, distriPlot,  ncol = 1, align = "hv",scale = c(1,1), 
+          rel_widths = c(1, 1), rel_heights = c(1, 3))
+```
 
 
 
+## Boxplot par catégories
 
+
+Principe : on trace un boxplot par modalité de la variable qualitative.
+
+E.g. : consommation de véhicules par type (dataset `mpg` de R)
+
+
+```{r, echo=FALSE, warning=FALSE}
+p <- ggplot(mpg, aes(class, hwy))
+p + geom_boxplot(outlier.alpha = 0.2) +xlab("type de véhicule (var. qualitative)") +ylab("consommation (var. quantitative")+theme_light()
+```
+
+
+# Références supplémentaires
+
+
+## Refs
+
+
+Cours complet sur les modèles linéaires : [https://www.math.univ-toulouse.fr/~barthe/M1modlin/poly.pdf]
+
+
+Interprétation des graphique de `lm` en R : [https://data.library.virginia.edu/diagnostic-plots/]
 
 
 
