@@ -806,13 +806,13 @@ Dans notre exemple , le degré de liberté est 2*1 = 2
 
 D'après le tableau de la loi de Student , la valeur critique pour un test avec 5% de chances de se tromper est un degré de liberté de 2 vaut 4.303.
 
-Si la valeur calculée du $\chi^2$ est **supérieure** à la valeur critique, on conserve $H_0$.
+Si la valeur calculée du $\chi^2$ est **supérieure** à la valeur critique, on rejette $H_0$.
 
 
 
-Pour notre exemple: On conserve $H_0$, i.e. les deux variables sont **indépendantes**,  car $\chi ^2 \approx 26 > 4.303$
+Pour notre exemple: On conserve $H_0$, i.e. les deux variables sont **dépendantes**,  car $\chi ^2 \approx 26 > 4.303$
 
-Interprétation: «la forme n'est pas liée à la couleur dans cette population, nous pouvons l'affirmer avec un risque d'erreur à 5%»
+Interprétation: «la forme est liée à la couleur dans cette population, nous pouvons l'affirmer avec un risque d'erreur d'au moins  5%»
 
 
 ## Les étapes du $\chi ^2$
