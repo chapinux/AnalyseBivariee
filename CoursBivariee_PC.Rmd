@@ -806,7 +806,7 @@ Dans notre exemple , le degré de liberté est 2*1 = 2
 
 D'après le tableau de la loi de Student , la valeur critique pour un test avec 5% de chances de se tromper est un degré de liberté de 2 vaut 4.303.
 
-Si la valeur calculée du $\chi^2$ est **supérieure** à la valeur critique, on rejette $H_0$.
+Si la valeur calculée du $\chi^2$ est **supérieure** à la valeur critique, on **rejette** $H_0$.
 
 
 
