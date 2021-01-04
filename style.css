@@ -1,23 +1,28 @@
 
 pre { 
     font-size: 13px;   /*bloc résultat d'exec de code*/
-    line-height: 1.1;
+    line-height: 1.2;
 }
 h1 { 
   font-size: 62px;
   color: #96C31E;
+  font: 1.2em ,"Arial", sans-serif;
 }
 h2 { 
-  font-size: 32px;
+  font-size: 1em;
   color: #96C31E; /* vert IGN*/
   border-bottom: 2px solid #96C31E;
+  font-family: "Arial", sans-serif;
 }
 
 h3 { 
-  font-size: 26px;
-  color: #acd341; /* vert IGN*/
+  font-size: 20px;
+  color: #acd341; /* vert IGN aussi*/
   border-bottom: 1px dashed #acd341;
   margin-top: -20px;
+  margin-left: -40px;
+  text-align: left;
+font: 1.2em ,"Arial", sans-serif;
 }
 
 
@@ -31,10 +36,42 @@ h3 {
   font-size: 65px;
   line-height: 1.4;
   letter-spacing: -3px;
-  color:#96C31E; ;
+  color:#96C31E ; 
 }
 
 
 .reveal {
-	background : #999999;
+	background : #FFFFFF;
+  font-size: 2em;
 }
+
+.reveal p {
+  color:#444444; 
+  text-align: left;
+}
+
+
+.reveal strong {
+  color: #acd341;
+}
+
+.col2 {
+    columns: 2 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 2 200px; /* chrome, safari */
+    -moz-columns: 2 200px; /* firefox */
+    display: block;
+    border: 1px solid #333;    
+}
+
+.col3 {
+    columns: 3 200px;         /* number of columns and width in pixels*/
+    -webkit-columns: 3 200px; /* chrome, safari */
+    -moz-columns: 3 200px; /* firefox */
+    display: inline;
+    border: 1px solid #333;    
+}
+
+
+ .reveal section img {
+  border: 1px solid #333;    
+  }

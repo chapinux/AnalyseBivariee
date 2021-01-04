@@ -1,8 +1,17 @@
 ---
 title: "Analyse Bivariée "
-author: "PC"
-date: '`r format(Sys.Date(), " %d %B  %Y")`'
-output: ioslides_presentation
+author: "M2 IGAST"
+date: "2020-2021"
+output: 
+  revealjs::revealjs_presentation:
+    theme: sky 
+    transition: fade
+    center: true
+    self_contained: false
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    
 css : style.css
 ---
 
@@ -13,7 +22,7 @@ library(knitr)
 library(xtable)
 ```
 
-# Introduction générale 
+# Introduction & Rappels  
 
 ## Sources et Reférences
 
@@ -24,69 +33,51 @@ library(xtable)
    http://www.foad-mooc.auf.org/IMG/pdf/424B_-Application_des_methodes_statistiques_d_analyse.pdf
 - et wikipedia !
 
-## Deux familles statistiques
+## Rappel  : Deux familles statistiques
 
 ### Statistiques **inférentielles**
+
+<br>
   Pour répondre à la question : «A partir d'un échantillon , que peut-on attendre (inférer) de la population ?»
-  
+<br>
+
   - Modèles, estimateurs, ... : **régression**, **estimation**, **extrapolation**
   - *Liaisons* statistiques : **corrélation**, **covariance**
   - test statistiques, notions de probabilités
   - e.g. sondages, rencensement, intervalle de confiance , prédictions, ...
 
-## Deux familles statistiques
+##  Rappel : Deux familles statistiques
   
 ### Statistiques **descriptives** 
 
+<br>
   Pour **résumer**, **synthétiser**, rendre intelligible, les propriétés d'une **population** à partir des **variables** qui décrivent les individus et la **répartition** de leurs valeurs.
+<br> 
   
   - Graphiques (histogrammes, boxplots, )
   - Mesures (fréquences , distributions , moments)
   - classification, ACP,...
 
-## Vocabulaire 
+##   Rappel : Vocabulaire 
  
-### Population
- **Ensemble** d'individus  
+<br>
+**Population** :  Ensemble d'individus  
  
  "données", "corpus", "échantillon", "data"
+<br>
  
-### Individu
- Unité statistique **élémentaire**: un individu, 
- 
- 
- "les lignes du tableau"
+**Individu** :  Unité statistique **élémentaire** = «les lignes du tableau»
 
-## Vocabulaire 
-
-### Variables 
- **Caractéristiques, propriétés** d’un individu, __mesurées__ par des enquêtes, des observations...
-
-"les colonnes du tableau"  
-
-- **Qualitatives** : facteurs, classes , catégories,  e.g. Sexe, CSP, type ; on parle de **modalité**
- 
-- **Quantitatives** : nombres e.g. Âge, taille, revenu, surface
-
-
-
-<span style="color:red">&#9888;</span> **Valeurs** et **Nature** de données sont deux choses distinctes. 
-<center> 3≠trois≠III </center>
-
-
-
- <span style="color:red">&#9888;</span> Valeurs manquantes  
- <center> NA , NaN, Null </center>
-
-
+**Variables ** :  Caractéristiques, propriétés d’un individu, **mesurées** par des enquêtes, des observations,... = «les colonnes du tableau»  
 
 
 
 ## L'objet du cours : l' Analyse Bivariée
 
-Objectif : **Analyser**  le **lien** entre deux variables
+Objectif : **Analyser**  le **lien** entre deux variables, par exemple : 
 
-- **2 variables quantitatives**
+
+**lien entre deux variables quantitatives**
 
 <font size=4>
 "nombre d'habitants et nombre de lignes de bus  par département"
@@ -94,13 +85,13 @@ Objectif : **Analyser**  le **lien** entre deux variables
 "nombre de lignes de bus en 1998 et en 2018"  
 </font>
 
-- **2 variables qualitatives** 
+**lien entre deux variables qualitatives** 
 
 <font size=4>
 "couleur des yeux  et port de lunettes" 
 </font>
 
-- **Une variable quantitative, une variable qualitative** 
+**lien entre une variable quantitative, une variable qualitative** 
 
 <font size=4>
 "taille et couleur des yeux"  
@@ -109,13 +100,15 @@ Objectif : **Analyser**  le **lien** entre deux variables
 
 ## Mise en garde
 
-<span style="color:red; font-size:100%">&#9888; </span> Une liaison, même très forte, entre deux variables, <span style="color:red">n'indique pas la causalité! &#9888;</span>
+ <span style="color:red"> Une liaison, même très forte, entre deux variables, n'indique pas la causalité! &#9888;</span>
 
 Erreur très courrante, très tentante.
 
-<center>
-<img src="chart.svg", width=100%></img>
-</center>
+
+
+<img src="chart.svg"/>
+
+
 © TylerVigen http://tylervigen.com/spurious-correlations
 
 
@@ -123,23 +116,20 @@ Erreur très courrante, très tentante.
 
 ## Analyse bivariée avec des données spatiales
 
-### Données "non spatiales"" 
-
-Les variables sont des valeurs attributaires d'individus, leurs localisation n'est pas prise en compte
-
 ### Données spatiales
   
-  Individus restreints spatialement (selection spatiale), ou variables de provenance géographique (e.g. Lieu de résidence) renseignées pour les individus 
+- Individus restreints spatialement (selection spatiale)
+- variables "géographique " (e.g. lieu de résidence) renseignées pour les individus 
   
-  quid des **distances** ? $\rightarrow$ modèle gravitaire , réseau etc.
+prise en compte des **distances** ? $\rightarrow$ modèle gravitaire 
 
 ### Données localisées
 
-  Auto-corrélation spatiale (Moran's I)
-  Geographicaly Weightd Regression (GWR)
+- Auto-corrélation spatiale (Moran's I)
+- Geographicaly Weightd Regression (GWR) $\approx$ regression linéaire avec prise en compte de la distance entre individus
 
 
-# Lien entre deux variables quantitatives
+# Régression linéaire 
 
 
 
@@ -156,7 +146,7 @@ Existe-t-il un lien entre des variables ?
 
 
 
-## Forme des dépendances 
+## Diverses formes des dépendances 
 
 ```{r formes, echo=FALSE, fig.width= 8, fig.height=5}
 x <- runif(100, min = 0, max=10)
@@ -179,22 +169,26 @@ plo2 <-  ggplot(data2, aes(x=x, y=value))+
 plo2
 ```
 
+En pratique les formes sont beaucoup moins régulières.
+
 
 ## Les étapes
 1. Tracer le nuage de points
-2. Existe-t-il une liaison ? 
+2. Existe-t-il une relation ? 
 3. Est-elle de forme linéaire ?  De quel sens ?
 4. Si la liaison est de forme linéaire $\rightarrow$ faire une **régression** 
 5. Si la liaison est non linéaire, est-elle monotone ?  De forme connue ?$\rightarrow$  Proposer un **modèle**
 
 
-5bis. Tenter un modèle **LOESS** avec prudence (uniquement descriptif , aucun pouvoir de généralisation) cf le blog de Lise Vaudor [http://perso.ens-lyon.fr/lise.vaudor/regression-loess/]
+5bis. Réaliser un modèle **LOESS** avec prudence (uniquement descriptif , aucun pouvoir de généralisation) 
+
+cf le blog de Lise Vaudor [http://perso.ens-lyon.fr/lise.vaudor/regression-loess/]
 
 ## Régression linéaire 
  
-Si la forme du nuage de points s'y prête, on peut faire une **régression linéaire** (ou **ajustement** linéaire).
+Si la forme du nuage de points s'y prête, on peut faire une **régression linéaire** (aussi appelé  **ajustement** linéaire).
  
-On cherche la droite qui «passe au mieux» (=*ajustée*) dans le nuage de points formés par le tracé de deux variables quantitatives $Var1$ et $Var2$ qui permet de vsiualiser: 
+On cherche la droite qui «passe au mieux» (=*ajustée*) dans le nuage de points de deux variables quantitatives $V_1$ et $V_2$,  qui permet de vsiualiser: 
 
 * l'**intensité** du lien / de la dépendance  : points proche de la droite ou non ?
 * la **forme** de la dépendance : linéaire ou non ?
@@ -202,7 +196,7 @@ On cherche la droite qui «passe au mieux» (=*ajustée*) dans le nuage de point
 
 ## Régression linéaire 
 
-```{r regline, echo=FALSE, fig.width=6, fig.height=4}
+```{r regline, echo=FALSE, fig.width=6, fig.height=4, message=F}
 library(ggplot2)
 data <-  data.frame(X=c(1,2,3,5,6,7,12,14,22, 2,3 ,10,10,9,7),Y=c(15,16,13, 9,9,12,3,2,5,11,12,7,8,9,8))
 plo <-  ggplot(data, aes(x=X, y=Y))+
@@ -224,34 +218,84 @@ plo
 ## Régression linéaire : le modèle
  
 
-L'**équation** de la droite  est un **modèle linéaire** de la relation statistique qui lie $V1$ et $V2$; on dit que $V1$ **explique** $V2$ :
+L'**équation** de la droite  est un **modèle linéaire** de la relation statistique qui lie $V_1$ et $V_2$; 
 
-Notre modèle : 
-<center>
-$V2=aV1+b$
-</center>
+Ici le modèle est :  $V_2=aV_1+b$
+
 
  
 \
 
-Si la régression linéaire est correcte, alors pour un individu $i$ dont on connait $V1_i$, on infère la valeur $V2_i$ par le modèle :    $V2_i = a \times V1_i +b$
+Si la régression linéaire est avérée, alors pour un individu $i$ dont on connait $V1_i$, on infère la valeur $V2_i$ par le modèle :    $\hat{V_{2i} = a \times V_{1i} +b$
  
+ On dit aussi que $V1$ **explique** $V2$ , ou que le modèle **prédit** $V_2$ à partir de $V_1$ (on nte les valeurs prédites $\hat{V2_i}$)
  
-  $\implies$Comment déterminer qu'une régression linéaire est «correcte» ? 
+## La grande question 
+
+  Comment déterminer qu'une régression linéaire est «correcte» ? 
+  
+  
+## Comment evaluer la "validité" du modèle linaire ?
+
+En pratique, il faut réunir deux critères : 
+
+- des coefficients avec des **p-values** associées **faibles** (e.g. <0.05)  $\leftrightarrow$ "on a peu de chances de se tromper"
+- un $R^2$ élevé  $\leftrightarrow$ "le modèle prédit bien les observations"
+  
  
 ## le $R^2$
  
- $R^2 \in [0;1]$ , coefficient de détermination linéaire .
+ $R^2 \in [0;1]$ , c'est le  **coefficient de détermination linéaire**.
 
 Donne la **qualité de prédiction** de la régression. 
 
 "Proche de 1"" $\equiv$ "très bonne qualité"
  
-C'est le pourcentage de variation de $V_2$ expliqué par la variation de $V_1$
+C'est le pourcentage de "variation" de $V_2$ due à la "variation" de $V_1$
 
-C'est aussi le carré de la corrélation $cor(V_1,V_2)$ (celle donnée par le $r$ de Pearson)
+## le $R^2$
+
+Le $R^2$ est le ratio de la variance de $V_2$ expliquée par $V_1$ (i.e. estimée par le modèle $aV_1+b$ ) et de la variance de $V_2$
+
+si on note $\hat{V_2}$ les valeurs de $V_2$ prédite par le modèle linéaire, alors:
+
+ $R^2=cor(\hat{V_2},V_2)$   
+  
+ On peut également écrire :  
   
   $R^2  = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y})^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}$
+
+
+
+
+## la p-value
+
+Elle peut s'interpréter comme «la probabilité d'avoir un résultat de regression identique avec deux variables véritablement indépendantes» 
+
+<br>
+<br>
+
+La p-value est associée à la notion d'**hypothèses nulle**. 
+Ici , l'hypothèse nulle est "les deux séries sont indépendantes". 
+
+
+## la p-value 
+ 
+Plus grossièrement : la p-value est le  **pourcentage de chances de se tromper** en rejetant l'hypothèse nulle, 
+
+<br> c'est à dire <br>
+
+en considérant que  les deux séries ne sont pas indépendantes et qu'il existe une relation entre les deux (ici, un  linéaire car nous testons le coefficient de coorélation linéaire).
+
+
+## l'Hypothèse nulle 
+
+$H_0$ : «les deux variables sont indépendantes»
+
+
+  - **conserver** $H_0$ : considérer les deux variables comme **indépendantes**
+  - **rejeter** $H_0$ : considérer les deux variables comme **dépendantes** = ayant une relation statistique, un lien.
+
 
 
 ## Format des resultats de `lm` avec R
@@ -263,32 +307,11 @@ summary(lm(iris$Petal.Length~iris$Petal.Width))
 Distribution des résidus, coefficients du modèle ajusté et leur **p-value** associée (ici sur un test de Student, notée `Pr(>|t|)` et  $R^2$) 
 
 
-## Comment evaluer la "validité" du modèle linaire ?
-
-En pratique, il faut réunir deux critères : 
-
-- des coefficients avec des p-values associées faibles (e.g. <0.05)  $\leftrightarrow$ "on a peu de chances de se tromper"
-- un $R^2$ élevé  $\leftrightarrow$ "le modèle prédit bien les observations"
-
-
-## la p-value
-
-Elle peut s'interpréter comme la probabilité d'avoir un résultat identique tout en conservant l'hypothèse nulle. 
-
-Ici , l'hypothèse nulle est "les deux séries sont indépendantes". 
-
-On peut grossièrement considérer que p-value = pourcentage de chances de se tromper en rejetant l'hypothèse nulle, c'est à dire en considérant que  les deux séries ne sont pas indépendantes et qu'il existe une relation (ici, linéaire car nous testons le coefficient de coorélation linéaire) entre les deux.
-
-
-Rappel : 
-  - conserver $H_0$ : considérer les deux variables comme indépendantes
-  - rejeter $H_0$ : considérer les deux variables comme ayant une relation statistique, un lien.
-
 
 
 ## Bonus: Critères de significativité du lien linéaire 
 
-Les **résidus** $\epsilon_i$ (écart entre valeur observée et valeur prédite  par le modèle pour l'individu $i$) doivent:
+Les **résidus** $\epsilon_i$ (écart entre valeur observée et valeur prédite ($V_2 - \hat{V_2}$) par le modèle pour l'individu $i$) doivent:
 
 - être indépendants  : $cov(x_i, \epsilon_i) = 0$
 - être distribués selon un loi normale de moyenne nulle $\mathscr{N}(0,\sigma_{\epsilon})$
@@ -298,7 +321,9 @@ Les **résidus** $\epsilon_i$ (écart entre valeur observée et valeur prédite 
 
 ## Bonus: Evaluation de l'indépendance des résidus avec R 
 
-Graphique de la fonction `acf`:  Si une barre exceptée la première dépasse  la ligne en pointillés, on peut remettre en cause l'indépendance des résidus. Ici, c'est le cas.
+Graphique de la fonction `acf`:  
+
+Si une barre exceptée la première dépasse  la ligne en pointillés, on peut remettre en cause l'indépendance des résidus. Ici, c'est le cas.
 
 ```{r residualSigni3,fig.width=6, fig.height=4}
 modele1 <- lm(iris$Petal.Length~ iris$Petal.Width)
@@ -363,13 +388,11 @@ plot(modele1,3)
 
 
 
-## Corrélation de deux variables avec R
-Pour étudier l'intensité d'un lien statistique linéaire entre 2 variables
-```{r corIris}
-cor(iris$Petal.Length, iris$Petal.Width)
-```
+# Corrélation de deux variables quantitatives 
 
-`cor(x,y)` donne le **coefficient de corrélation** $\in [-1;1]$ entre deux variables x et y (e.g. colonnes d'un dataframe) .
+Dans le cas d'une liaison statistique linéaire entre 2 variables , on peut calculer l'«intensité» de ce lien : leur  **corrélation**
+
+$cor(x,y) \in [-1;1]$ entre deux variables x et y (e.g. colonnes d'un dataframe) .
 
 - +1 : les deux variables croissent ou décroissent conjointement
 - -1 : quand l'une des variables croît, l'autre décroît.
@@ -400,7 +423,7 @@ $r= \frac{cov(V_1,V_2)}{\sigma_{V_1}\sigma_{V_2}}$
 
 
 
-Rappel : La covariance est la moyenne du produit des écarts à la moyenne
+La covariance est la moyenne du produit des écarts à la moyenne
 
 $cov(V_1,V_2)= E[(V_1-E[V_1])(V_2-E[V_2])]$
 
@@ -417,7 +440,7 @@ cor(iris[,1:4])
 
 Présentation des corrélations entre les variables quantitatives d'un tableau, pour tous les couples de variables.
 
-La matrice de corrélation est symmétrique, et sa diagonale est constituée de 1.
+La matrice de corrélation est symétrique, et sa diagonale est constituée de 1.
 
 
 
@@ -452,7 +475,7 @@ $\rightarrow$ s'interroger sur la nécessité de nettoyer/filter les données et
 
 
 
-## Regression linéaire avec R
+## Réaliser une régression linéaire avec R
 
 Fonction  `lm()` , modèle de la forme `réponse ~ termes` 
 
@@ -479,7 +502,7 @@ $rg(X_i)$ le *rang* de $X_i$  (le classement de sa valeur) dans la distribution 
 
 $n$ le nombre d'individus
 
-## Obtenir le coefficient Spearman avec R
+## Obtenir le coefficient  de Spearman avec R
 
 
 ```{r rho}
@@ -503,7 +526,7 @@ si $r > \rho$: il y a un biais, prendre $\rho$ (plus robuste)
 ... et toujours **tracer le nuage de points** pour examiner  la nature de la relation.
 
 
-# Linéariser des relations non-linéaires
+# "trucs" pour linéariser des relations non-linéaires
 
 
 ## Relation log-linéaire 
@@ -562,7 +585,7 @@ plo2
 
 Relation de type $y=a*ln(x)+b$ 
 
-$\rightarrow$ changement de variable !
+$\rightarrow$ changement de variable 
 
 ## Relation logistique
 
