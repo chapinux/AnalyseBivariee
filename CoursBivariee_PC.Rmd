@@ -220,15 +220,15 @@ plo
 
 L'**équation** de la droite  est un **modèle linéaire** de la relation statistique qui lie $V_1$ et $V_2$; 
 
-Ici le modèle est :  $V_2=aV_1+b$
+Ici le modèle est :  $\hat{V_2}=aV_1+b$
 
 
  
 \
 
-Si la régression linéaire est avérée, alors pour un individu $i$ dont on connait $V1_i$, on infère la valeur $V2_i$ par le modèle :    $\hat{V_{2i} = a \times V_{1i} +b$
+Si la régression linéaire est avérée, alors pour un individu $i$ dont on connait $V1_i$, on infère la valeur $V2_i$ par le modèle :    $\hat{V_{2i}} = aV_{1i} +b$
  
- On dit aussi que $V1$ **explique** $V2$ , ou que le modèle **prédit** $V_2$ à partir de $V_1$ (on nte les valeurs prédites $\hat{V2_i}$)
+ On dit aussi que $V_1$ **explique** $V_2$ , ou que le modèle **prédit** $V_2$ à partir de $V_1$ (on note les valeurs prédites $\hat{V_2}$)
  
 ## La grande question 
 
@@ -255,17 +255,15 @@ C'est le pourcentage de "variation" de $V_2$ due à la "variation" de $V_1$
 
 ## le $R^2$
 
-Le $R^2$ est le ratio de la variance de $V_2$ expliquée par $V_1$ (i.e. estimée par le modèle $aV_1+b$ ) et de la variance de $V_2$
+défini par : 
+ $R^2  = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y})^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}$
+
 
 si on note $\hat{V_2}$ les valeurs de $V_2$ prédite par le modèle linéaire, alors:
 
- $R^2=cor(\hat{V_2},V_2)$   
-  
- On peut également écrire :  
-  
-  $R^2  = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y})^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}$
+ $R^2=cor(\hat{V_2},V_2)^2$   
 
-
+(au sens de la corrélation de Pearson)
 
 
 ## la p-value
@@ -285,7 +283,7 @@ Plus grossièrement : la p-value est le  **pourcentage de chances de se tromper*
 
 <br> c'est à dire <br>
 
-en considérant que  les deux séries ne sont pas indépendantes et qu'il existe une relation entre les deux (ici, un  linéaire car nous testons le coefficient de coorélation linéaire).
+se tromper en considérant que  les deux séries ne sont pas indépendantes et qu'il existe une relation entre les deux (ici, linéaire car nous testons un modèle linéaire).
 
 
 ## l'Hypothèse nulle 
@@ -298,10 +296,11 @@ $H_0$ : «les deux variables sont indépendantes»
 
 
 
-## Format des resultats de `lm` avec R
+## Format des resultats donnés par avec R
 
 ```{r reslm,fig.width=6, fig.height=4}
-summary(lm(iris$Petal.Length~iris$Petal.Width))
+regression <- lm(iris$Petal.Length~iris$Petal.Width)
+summary(regression)
 ```
 
 Distribution des résidus, coefficients du modèle ajusté et leur **p-value** associée (ici sur un test de Student, notée `Pr(>|t|)` et  $R^2$) 
@@ -313,8 +312,8 @@ Distribution des résidus, coefficients du modèle ajusté et leur **p-value** a
 
 Les **résidus** $\epsilon_i$ (écart entre valeur observée et valeur prédite ($V_2 - \hat{V_2}$) par le modèle pour l'individu $i$) doivent:
 
-- être indépendants  : $cov(x_i, \epsilon_i) = 0$
-- être distribués selon un loi normale de moyenne nulle $\mathscr{N}(0,\sigma_{\epsilon})$
+- être indépendants  : covariance nulle ou très faible $cov(x_i, \epsilon_i) = 0$
+- être distribués selon un loi normale de moyenne nulle $\epsilon \sim \mathscr{N}(0,\sigma_{\epsilon})$
 - être distribués de façon homogène (homoscédasticité), i.e. de variance constante $var(\epsilon_i)=\sigma_{\epsilon}^2$ , indépendante de l'observation
 
 
@@ -343,7 +342,7 @@ La fonction `lm` de R et ses résultats permettent de tracer 4 graphiques pour �
 
 ```{r residualSignif,fig.width=6, fig.height=4, cache=T}
 modele1 <- lm(iris$Petal.Length~ iris$Petal.Width)
-par(mfrow=c(2,2)) # pour avoir une matrice de grpahes
+par(mfrow=c(2,2)) # pour avoir une matrice de graphes
 plot(modele1)
 ```
 
@@ -353,14 +352,13 @@ plot(modele1)
 
 Premier graphique : pour vérifier que le nuage de points est homogène (e.g. pas de relation non-linéaire entre résidus et valeurs prédites)
 
-Une éventuelle relation non-linéaire pourrait se retrouver dans les résidus.
+Une éventuelle relation non-linéaire pourrait se retrouver dans les résidus(Ici : légère structure parabolique )
 
 ```{r residualSignif1,fig.width=6, fig.height=3, cache=T}
 modele1 <- lm(iris$Petal.Length~ iris$Petal.Width)
 plot(modele1,1)
 ```
 
-Ici : légère structure parabolique 
 
 ## Bonus: Evaluer la normalité de la distribution des résidus avec R
 
@@ -390,9 +388,11 @@ plot(modele1,3)
 
 # Corrélation de deux variables quantitatives 
 
-Dans le cas d'une liaison statistique linéaire entre 2 variables , on peut calculer l'«intensité» de ce lien : leur  **corrélation**
+## Corrélation (linéaire)
 
-$cor(x,y) \in [-1;1]$ entre deux variables x et y (e.g. colonnes d'un dataframe) .
+Dans le cas d'une liaison statistique linéaire entre deux variables, on peut calculer l'«intensité» de ce lien sans nécessairement trouver les coefficients modèle linéaire : c'est la  **corrélation**
+
+$cor(x,y) \in [-1;1]$ entre deux variables $x$ et $y$ .
 
 - +1 : les deux variables croissent ou décroissent conjointement
 - -1 : quand l'une des variables croît, l'autre décroît.
@@ -423,7 +423,7 @@ $r= \frac{cov(V_1,V_2)}{\sigma_{V_1}\sigma_{V_2}}$
 
 
 
-La covariance est la moyenne du produit des écarts à la moyenne
+La covariance est la **moyenne du produit des écarts à la moyenne**
 
 $cov(V_1,V_2)= E[(V_1-E[V_1])(V_2-E[V_2])]$
 
@@ -475,12 +475,14 @@ $\rightarrow$ s'interroger sur la nécessité de nettoyer/filter les données et
 
 
 
-## Réaliser une régression linéaire avec R
+# Régression linéaire avec R
 
-Fonction  `lm()` , modèle de la forme `réponse ~ termes` 
+## Regression linéaire avec R
+
+Fonction  `lm()` , modèle de la forme `Variable_a_expliquer ~ Variable_explicative` 
 
 ```{r regress, echo=TRUE }
-my_model <- lm(Petal.Width~Petal.Length, iris)
+my_model <- lm(Petal.Width~Petal.Length, data=iris)
 summary(my_model)
 ```
 
@@ -517,7 +519,7 @@ l'argument `exact` doit être précisé en cas de valeurs ex aequo dans les donn
 
 $r$ (Pearson) et $\rho$ (Spearman) sont deux moyens d'estimer la corrélation: lequel choisir ?
 
-si $r = \rho$: on garde $r$ (plus simple)
+si $r = \rho$: on garde $r$ (plus simple à interpréter)
 
 si $r < \rho$: la relation est non-linéaire : prendre  $\rho$
 
@@ -623,7 +625,7 @@ mosaicplot(~Class+Survived, data=Titanic, color=mypalette,main = "")
 ``` 
 
 
-## Test statistique dit du "Chi 2"" ou "Chi carré""
+## Test statistique dit du "Chi 2" ou "Chi carré"
 
 Le test du $\chi ^2$ est un test d'indépendance, il mesure l'**écart**, la différence,  entre deux distributions de **variables qualitatives**  
 
@@ -632,14 +634,14 @@ Il répond à la question : "Existe-t-il un lien statistique entre deux séries 
 (La réponse est de type  OUI/NON , le $\chi^2$ ne donne pas l'**intensité** du lien)
 
 
-## Test statistique dit du "Chi 2"" ou "Chi carré""
+## Test statistique dit du "Chi 2" ou "Chi carré"
 
 - Hypothèse nulle $H_0$ : les deux distributions sont indépendantes.
 - «faire le test» permet de conserver ou de rejeter cette hypothèse
 
-Principe: 
+## Principe du Chi 2
 
-- On génère une **distribution théorique** à laquelle on va comparer la **distribution observée**.
+- On génère une **population théorique** à laquelle on va comparer la **population observée** en considérant leurs **distribution**.
 - Cette distribution théorique reflête ce qui se passerait si on suppose que $H_0$ est vraie 
 - Avec cette comparaison,  on pourra rejeter ou conserver l'hypothèse nulle.
 
@@ -651,7 +653,7 @@ La construction de cette distribution se fait à partir du **tableau de continge
 C'est un tableau à double entrée qui croise deux **variables qualitatives**. 
 
 
-Dans une case on trouve l'effectif des individus caractérisés par la conjonction des modalités en ligne et en colonnes.
+Dans une case on trouve l'**effectif** (= le nombre) des individus caractérisés par la conjonction des modalités en ligne et en colonnes.
 
 
 Exemple sur des formes géométriques de couleurs :
@@ -667,7 +669,7 @@ carré &  22 &   12 \\
 \end{array}$$
 
 
-Dans R : fonction `table`
+Dans R : fonction `table()`
 
 ## Construction de la distribution théorique.
 
@@ -691,7 +693,7 @@ On appelle les sommes en lignes et en colonnes **sommes marginales**, elles sont
 
 ## Construction de la distribution théorique
 
-En divisant par la taille de l'effectif, on obtient les **fréquences observées**.
+En divisant par la taille de la population, on obtient les **fréquences observées**.
 
 $$\begin{array}{c|c|c|c}
    & blanc & noir & \texttt{total}\\ 
@@ -705,12 +707,12 @@ carré &  0.20952381&  0.11428571 &  0.3238095\\
   \texttt{total} &  0.552381 & 0.447619 & 1
   \end{array}$$
 
-
+<font size="4">
 On obtient les **pourcentages de l'effectif** dans les cases du tableau.
 
 
-C'est également la **probabilité** dans cette population, qu'un individu soit caractérisé par les modalités en ligne et en colonne.
-
+C'est également la **probabilité** , qu'un individu de la **population observée** soit caractérisé par les modalités en ligne et en colonne.
+</font>
 
 ## Construction de la distribution théorique
 
@@ -727,10 +729,10 @@ carré &  0.20952381&  0.11428571 &  \textbf{0.3238095}\\
   \end{array}$$
 
 
-De la même façon, les **fréquences marginales**, donnent la **probabilité** d'observer un individu de la modalité correspondant à la ligne ou à la colonne considérée.
+De la même façon, les **fréquences marginales** (marges divisées par la taille de la pop.), donnent la **probabilité** d'observer un individu de la modalité correspondant à la ligne ou à la colonne considérée.
 
 <font size="4">
-Exemple : dans cette population , j'ai 29.5% de chances de tirer un triangle
+Exemple : dans cette population , j'ai 29.5% de chances de tirer un triangle, et 55% de chances de tirer une pièce blanche.
 </font>
 
 ## Construction de la distribution théorique
@@ -738,7 +740,7 @@ Exemple : dans cette population , j'ai 29.5% de chances de tirer un triangle
 Rappel : Probabilité conjointe de deux évènements $A$ et $B$ **indépendants**  
 $P(A \cap B) = P(A) \times P(B)$
 
-A partir des **fréquences marginales** précédentes, on obtient pour chaque couple de modalités la probabilité **théorique**,  celle qui suppose $H_0$, i.e. l'indépendance des deux variables, par un simple produit.
+À partir des **fréquences marginales** précédentes, on obtient pour chaque couple de modalités, la probabilité **théorique**,  celle qui suppose $H_0$, par un simple **produit**.
 
 <font size="4">
 Exemple :  Si $H_0$ est vraie, la probabilité d'observer un triangle noir est donnée par: 
@@ -792,7 +794,7 @@ N.B. Il n'est pas nécessaire d'arrondir les effectifs théoriques
 ## Calcul du Chi 2
 
 
-C'est la somme, pour chaque case du tableau de contingence,  des écarts carrés entre  effectif observé et effectif théorique, divisés par l'effectif théorique.
+C'est la somme, pour chaque case du tableau de contingence (i.e. pour chaque couple de modalités),  des écarts carrés entre effectif observé et effectif théorique**, divisés par l'effectif théorique.
 
 Soient $T^{obs}$ le tableau des effectifs observés, $T^{theo}$ le tableau des effectifs théoriques, 
 
@@ -861,6 +863,7 @@ Pas de moyen **simple** de calculer le lien entre une variable qualitative et un
   - régression logistique 
   - analyse de la variance (ANOVA)
   
+$\implies$ Alors on fait un graphique ! 
 
 La variable qualitative sert de **catégorie**, on fait varier la représentation graphique de la variable quantitative suivant cette catégorie.
 

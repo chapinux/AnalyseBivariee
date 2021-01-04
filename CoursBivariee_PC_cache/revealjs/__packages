@@ -1,0 +1,7 @@
+base
+knitr
+xtable
+reshape2
+ggplot2
+RColorBrewer
+cowplot
