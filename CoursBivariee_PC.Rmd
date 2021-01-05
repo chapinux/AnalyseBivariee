@@ -835,7 +835,7 @@ Si la valeur calculée du $\chi^2$ est **supérieure** à la valeur critique, on
 
 
 
-Pour notre exemple: On conserve $H_0$, i.e. les deux variables sont **dépendantes**,  car $\chi ^2 \approx 26 > 4.303$
+Pour notre exemple: On rejette $H_0$, i.e. les deux variables sont **dépendantes**,  car $\chi ^2 \approx 26 > 4.303$
 
 Interprétation: «la forme est liée à la couleur dans cette population, nous pouvons l'affirmer avec un risque d'erreur d'au moins  5%»
 
