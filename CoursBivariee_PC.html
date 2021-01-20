@@ -12,41 +12,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="CoursBivariee_PC_files/reveal.js-3.3.0.1/css/theme/sky.css" id="theme">
@@ -492,10 +520,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h3 class="date">2020-2021</h3>
 </section>
 
-<section><section id="introduction-rappels" class="titleslide slide level1"><h1>Introduction &amp; Rappels</h1></section><section id="sources-et-reférences" class="slide level2">
+<section><section id="introduction-rappels" class="title-slide slide level1"><h1>Introduction &amp; Rappels</h1></section><section id="sources-et-reférences" class="slide level2">
 <h2>Sources et Reférences</h2>
 <ul>
-<li>Ce cours reprend le cheminement du cours M2 IGAST 2017 d'Élodie Buard</li>
+<li>Ce cours reprend le cheminement du cours M2 IGAST 2017 d’Élodie Buard</li>
 <li>R et espace <a href="https://framabook.org/r-et-espace/" class="uri">https://framabook.org/r-et-espace/</a></li>
 <li>Probabilités, analyse de données et statistiques , Gilbert Saporta, Editions TECHNIP, 2011</li>
 <li>Nombreuses ressources en ligne : <a href="http://www.foad-mooc.auf.org/IMG/pdf/424B_-Application_des_methodes_statistiques_d_analyse.pdf" class="uri">http://www.foad-mooc.auf.org/IMG/pdf/424B_-Application_des_methodes_statistiques_d_analyse.pdf</a></li>
@@ -504,43 +532,43 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section id="rappel-deux-familles-statistiques" class="slide level2">
 <h2>Rappel : Deux familles statistiques</h2>
 <h3 id="statistiques-inférentielles">Statistiques <strong>inférentielles</strong></h3>
-<p><br> Pour répondre à la question : «A partir d'un échantillon , que peut-on attendre (inférer) de la population ?» <br></p>
+<p><br> Pour répondre à la question : «A partir d’un échantillon , que peut-on attendre (inférer) de la population ?» <br></p>
 <ul>
-<li>Modèles, estimateurs, ... : <strong>régression</strong>, <strong>estimation</strong>, <strong>extrapolation</strong></li>
+<li>Modèles, estimateurs, … : <strong>régression</strong>, <strong>estimation</strong>, <strong>extrapolation</strong></li>
 <li><em>Liaisons</em> statistiques : <strong>corrélation</strong>, <strong>covariance</strong></li>
 <li>test statistiques, notions de probabilités</li>
-<li>e.g. sondages, rencensement, intervalle de confiance , prédictions, ...</li>
+<li>e.g. sondages, rencensement, intervalle de confiance , prédictions, …</li>
 </ul>
 </section><section id="rappel-deux-familles-statistiques-1" class="slide level2">
 <h2>Rappel : Deux familles statistiques</h2>
 <h3 id="statistiques-descriptives">Statistiques <strong>descriptives</strong></h3>
-<p><br> Pour <strong>résumer</strong>, <strong>synthétiser</strong>, rendre intelligible, les propriétés d'une <strong>population</strong> à partir des <strong>variables</strong> qui décrivent les individus et la <strong>répartition</strong> de leurs valeurs. <br></p>
+<p><br> Pour <strong>résumer</strong>, <strong>synthétiser</strong>, rendre intelligible, les propriétés d’une <strong>population</strong> à partir des <strong>variables</strong> qui décrivent les individus et la <strong>répartition</strong> de leurs valeurs. <br></p>
 <ul>
 <li>Graphiques (histogrammes, boxplots, )</li>
 <li>Mesures (fréquences , distributions , moments)</li>
-<li>classification, ACP,...</li>
+<li>classification, ACP,…</li>
 </ul>
 </section><section id="rappel-vocabulaire" class="slide level2">
 <h2>Rappel : Vocabulaire</h2>
-<p><br> <strong>Population</strong> : Ensemble d'individus</p>
-<p>&quot;données&quot;, &quot;corpus&quot;, &quot;échantillon&quot;, &quot;data&quot; <br></p>
+<p><br> <strong>Population</strong> : Ensemble d’individus</p>
+<p>“données”, “corpus”, “échantillon”, “data” <br></p>
 <p><strong>Individu</strong> : Unité statistique <strong>élémentaire</strong> = «les lignes du tableau»</p>
-<p><strong>Variables </strong> : Caractéristiques, propriétés d’un individu, <strong>mesurées</strong> par des enquêtes, des observations,... = «les colonnes du tableau»</p>
+<p><strong>Variables </strong> : Caractéristiques, propriétés d’un individu, <strong>mesurées</strong> par des enquêtes, des observations,… = «les colonnes du tableau»</p>
 </section><section id="lobjet-du-cours-l-analyse-bivariée" class="slide level2">
-<h2>L'objet du cours : l' Analyse Bivariée</h2>
+<h2>L’objet du cours : l’ Analyse Bivariée</h2>
 <p>Objectif : <strong>Analyser</strong> le <strong>lien</strong> entre deux variables, par exemple :</p>
 <p><strong>lien entre deux variables quantitatives</strong></p>
-<p><font size=4> &quot;nombre d'habitants et nombre de lignes de bus par département&quot;</p>
-<p>&quot;nombre de lignes de bus en 1998 et en 2018&quot;<br />
+<p><font size=4> “nombre d’habitants et nombre de lignes de bus par département”</p>
+<p>“nombre de lignes de bus en 1998 et en 2018”<br />
 </font></p>
 <p><strong>lien entre deux variables qualitatives</strong></p>
-<p><font size=4> &quot;couleur des yeux et port de lunettes&quot; </font></p>
+<p><font size=4> “couleur des yeux et port de lunettes” </font></p>
 <p><strong>lien entre une variable quantitative, une variable qualitative</strong></p>
-<p><font size=4> &quot;taille et couleur des yeux&quot;<br />
+<p><font size=4> “taille et couleur des yeux”<br />
 </font></p>
 </section><section id="mise-en-garde" class="slide level2">
 <h2>Mise en garde</h2>
-<p><span style="color:red"> Une liaison, même très forte, entre deux variables, n'indique pas la causalité! ⚠</span></p>
+<p><span style="color:red"> Une liaison, même très forte, entre deux variables, n’indique pas la causalité! ⚠</span></p>
 <p>Erreur très courrante, très tentante.</p>
 <p><img src="chart.svg"/></p>
 <p>© TylerVigen <a href="http://tylervigen.com/spurious-correlations" class="uri">http://tylervigen.com/spurious-correlations</a></p>
@@ -549,20 +577,20 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h3 id="données-spatiales">Données spatiales</h3>
 <ul>
 <li>Individus restreints spatialement (selection spatiale)</li>
-<li>variables &quot;géographique &quot; (e.g. lieu de résidence) renseignées pour les individus</li>
+<li>variables “géographique” (e.g. lieu de résidence) renseignées pour les individus</li>
 </ul>
 <p>prise en compte des <strong>distances</strong> ? <span class="math inline">\(\rightarrow\)</span> modèle gravitaire</p>
 <h3 id="données-localisées">Données localisées</h3>
 <ul>
-<li>Auto-corrélation spatiale (Moran's I)</li>
+<li>Auto-corrélation spatiale (Moran’s I)</li>
 <li>Geographicaly Weightd Regression (GWR) <span class="math inline">\(\approx\)</span> regression linéaire avec prise en compte de la distance entre individus</li>
 </ul>
 </section></section>
-<section><section id="régression-linéaire" class="titleslide slide level1"><h1>Régression linéaire</h1></section><section id="première-étape" class="slide level2">
+<section><section id="régression-linéaire" class="title-slide slide level1"><h1>Régression linéaire</h1></section><section id="première-étape" class="slide level2">
 <h2>Première étape</h2>
-<p><span style="color:red">Toujours en premier:</span> Regarder l'aspect des données avec des graphiques (&quot;exploration visuelle&quot;)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)
-<span class="kw">plot</span>(iris)</code></pre></div>
+<p><span style="color:red">Toujours en premier:</span> Regarder l’aspect des données avec des graphiques (“exploration visuelle”)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">data</span>(iris)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">plot</span>(iris)</span></code></pre></div>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/plotIris-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Existe-t-il un lien entre des variables ?</p>
 </section><section id="diverses-formes-des-dépendances" class="slide level2">
@@ -582,10 +610,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>cf le blog de Lise Vaudor [<a href="http://perso.ens-lyon.fr/lise.vaudor/regression-loess/" class="uri">http://perso.ens-lyon.fr/lise.vaudor/regression-loess/</a>]</p>
 </section><section id="régression-linéaire-1" class="slide level2">
 <h2>Régression linéaire</h2>
-<p>Si la forme du nuage de points s'y prête, on peut faire une <strong>régression linéaire</strong> (aussi appelé <strong>ajustement</strong> linéaire).</p>
+<p>Si la forme du nuage de points s’y prête, on peut faire une <strong>régression linéaire</strong> (aussi appelé <strong>ajustement</strong> linéaire).</p>
 <p>On cherche la droite qui «passe au mieux» (=<em>ajustée</em>) dans le nuage de points de deux variables quantitatives <span class="math inline">\(V_1\)</span> et <span class="math inline">\(V_2\)</span>, qui permet de vsiualiser:</p>
 <ul>
-<li>l'<strong>intensité</strong> du lien / de la dépendance : points proche de la droite ou non ?</li>
+<li>l’<strong>intensité</strong> du lien / de la dépendance : points proche de la droite ou non ?</li>
 <li>la <strong>forme</strong> de la dépendance : linéaire ou non ?</li>
 <li>le <strong>sens</strong> de la dépendance : nulle, positive ou négative ?</li>
 </ul>
@@ -595,27 +623,28 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>«Droite qui passe au mieux» = qui minimise la <strong>somme des écarts quadratiques</strong> entre la droite et les points du nuage.</p>
 </section><section id="régression-linéaire-le-modèle" class="slide level2">
 <h2>Régression linéaire : le modèle</h2>
-<p>L'<strong>équation</strong> de la droite est un <strong>modèle linéaire</strong> de la relation statistique qui lie <span class="math inline">\(V_1\)</span> et <span class="math inline">\(V_2\)</span>;</p>
+<p>L’<strong>équation</strong> de la droite est un <strong>modèle linéaire</strong> de la relation statistique qui lie <span class="math inline">\(V_1\)</span> et <span class="math inline">\(V_2\)</span>;</p>
 <p>Ici le modèle est : <span class="math inline">\(\hat{V_2}=aV_1+b\)</span></p>
 <p><br />
-Si la régression linéaire est avérée, alors pour un individu <span class="math inline">\(i\)</span> dont on connait <span class="math inline">\(V1_i\)</span>, on infère la valeur <span class="math inline">\(V2_i\)</span> par le modèle : <span class="math inline">\(\hat{V_{2i}} = aV_{1i} +b\)</span></p>
+</p>
+<p>Si la régression linéaire est avérée, alors pour un individu <span class="math inline">\(i\)</span> dont on connait <span class="math inline">\(V1_i\)</span>, on infère la valeur <span class="math inline">\(V2_i\)</span> par le modèle : <span class="math inline">\(\hat{V_{2i}} = aV_{1i} +b\)</span></p>
 <p>On dit aussi que <span class="math inline">\(V_1\)</span> <strong>explique</strong> <span class="math inline">\(V_2\)</span> , ou que le modèle <strong>prédit</strong> <span class="math inline">\(V_2\)</span> à partir de <span class="math inline">\(V_1\)</span> (on note les valeurs prédites <span class="math inline">\(\hat{V_2}\)</span>)</p>
 </section><section id="la-grande-question" class="slide level2">
 <h2>La grande question</h2>
-<p>Comment déterminer qu'une régression linéaire est «correcte» ?</p>
+<p>Comment déterminer qu’une régression linéaire est «correcte» ?</p>
 </section><section id="comment-evaluer-la-validité-du-modèle-linaire" class="slide level2">
-<h2>Comment evaluer la &quot;validité&quot; du modèle linaire ?</h2>
+<h2>Comment evaluer la “validité” du modèle linaire ?</h2>
 <p>En pratique, il faut réunir deux critères :</p>
 <ul>
-<li>des coefficients avec des <strong>p-values</strong> associées <strong>faibles</strong> (e.g. &lt;0.05) <span class="math inline">\(\leftrightarrow\)</span> &quot;on a peu de chances de se tromper&quot;</li>
-<li>un <span class="math inline">\(R^2\)</span> élevé <span class="math inline">\(\leftrightarrow\)</span> &quot;le modèle prédit bien les observations&quot;</li>
+<li>des coefficients avec des <strong>p-values</strong> associées <strong>faibles</strong> (e.g. &lt;0.05) <span class="math inline">\(\leftrightarrow\)</span> “on a peu de chances de se tromper”</li>
+<li>un <span class="math inline">\(R^2\)</span> élevé <span class="math inline">\(\leftrightarrow\)</span> “le modèle prédit bien les observations”</li>
 </ul>
 </section><section id="le-r2" class="slide level2">
 <h2>le <span class="math inline">\(R^2\)</span></h2>
-<p><span class="math inline">\(R^2 \in [0;1]\)</span> , c'est le <strong>coefficient de détermination linéaire</strong>.</p>
+<p><span class="math inline">\(R^2 \in [0;1]\)</span> , c’est le <strong>coefficient de détermination linéaire</strong>.</p>
 <p>Donne la <strong>qualité de prédiction</strong> de la régression.</p>
-<p>&quot;Proche de 1&quot;&quot; <span class="math inline">\(\equiv\)</span> &quot;très bonne qualité&quot;</p>
-<p>C'est le pourcentage de &quot;variation&quot; de <span class="math inline">\(V_2\)</span> due à la &quot;variation&quot; de <span class="math inline">\(V_1\)</span></p>
+<p>“Proche de 1”" <span class="math inline">\(\equiv\)</span> “très bonne qualité”</p>
+<p>C’est le pourcentage de “variation” de <span class="math inline">\(V_2\)</span> due à la “variation” de <span class="math inline">\(V_1\)</span></p>
 </section><section id="le-r2-1" class="slide level2">
 <h2>le <span class="math inline">\(R^2\)</span></h2>
 <p>défini par : <span class="math inline">\(R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y})^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}\)</span></p>
@@ -624,16 +653,16 @@ Si la régression linéaire est avérée, alors pour un individu <span class="ma
 <p>(au sens de la corrélation de Pearson)</p>
 </section><section id="la-p-value" class="slide level2">
 <h2>la p-value</h2>
-<p>Elle peut s'interpréter comme «la probabilité d'avoir un résultat de regression identique avec deux variables véritablement indépendantes»</p>
+<p>Elle peut s’interpréter comme «la probabilité d’avoir un résultat de regression identique avec deux variables véritablement indépendantes»</p>
 <p><br> <br></p>
-<p>La p-value est associée à la notion d'<strong>hypothèses nulle</strong>. Ici , l'hypothèse nulle est &quot;les deux séries sont indépendantes&quot;.</p>
+<p>La p-value est associée à la notion d’<strong>hypothèses nulle</strong>. Ici , l’hypothèse nulle est “les deux séries sont indépendantes”.</p>
 </section><section id="la-p-value-1" class="slide level2">
 <h2>la p-value</h2>
-<p>Plus grossièrement : la p-value est le <strong>pourcentage de chances de se tromper</strong> en rejetant l'hypothèse nulle,</p>
-<p><br> c'est à dire <br></p>
-<p>se tromper en considérant que les deux séries ne sont pas indépendantes et qu'il existe une relation entre les deux (ici, linéaire car nous testons un modèle linéaire).</p>
+<p>Plus grossièrement : la p-value est le <strong>pourcentage de chances de se tromper</strong> en rejetant l’hypothèse nulle,</p>
+<p><br> c’est à dire <br></p>
+<p>se tromper en considérant que les deux séries ne sont pas indépendantes et qu’il existe une relation entre les deux (ici, linéaire car nous testons un modèle linéaire).</p>
 </section><section id="lhypothèse-nulle" class="slide level2">
-<h2>l'Hypothèse nulle</h2>
+<h2>l’Hypothèse nulle</h2>
 <p><span class="math inline">\(H_0\)</span> : «les deux variables sont indépendantes»</p>
 <ul>
 <li><strong>conserver</strong> <span class="math inline">\(H_0\)</span> : considérer les deux variables comme <strong>indépendantes</strong></li>
@@ -641,8 +670,8 @@ Si la régression linéaire est avérée, alors pour un individu <span class="ma
 </ul>
 </section><section id="format-des-resultats-donnés-par-avec-r" class="slide level2">
 <h2>Format des resultats donnés par avec R</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">regression &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span>iris<span class="op">$</span>Petal.Width)
-<span class="kw">summary</span>(regression)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>regression &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span>iris<span class="op">$</span>Petal.Width)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">summary</span>(regression)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = iris$Petal.Length ~ iris$Petal.Width)
@@ -664,61 +693,61 @@ Si la régression linéaire est avérée, alors pour un individu <span class="ma
 <p>Distribution des résidus, coefficients du modèle ajusté et leur <strong>p-value</strong> associée (ici sur un test de Student, notée <code>Pr(&gt;|t|)</code> et <span class="math inline">\(R^2\)</span>)</p>
 </section><section id="bonus-critères-de-significativité-du-lien-linéaire" class="slide level2">
 <h2>Bonus: Critères de significativité du lien linéaire</h2>
-<p>Les <strong>résidus</strong> <span class="math inline">\(\epsilon_i\)</span> (écart entre valeur observée et valeur prédite (<span class="math inline">\(V_2 - \hat{V_2}\)</span>) par le modèle pour l'individu <span class="math inline">\(i\)</span>) doivent:</p>
+<p>Les <strong>résidus</strong> <span class="math inline">\(\epsilon_i\)</span> (écart entre valeur observée et valeur prédite (<span class="math inline">\(V_2 - \hat{V_2}\)</span>) par le modèle pour l’individu <span class="math inline">\(i\)</span>) doivent:</p>
 <ul>
 <li>être indépendants : covariance nulle ou très faible <span class="math inline">\(cov(x_i, \epsilon_i) = 0\)</span></li>
 <li>être distribués selon un loi normale de moyenne nulle <span class="math inline">\(\epsilon \sim \mathscr{N}(0,\sigma_{\epsilon})\)</span></li>
-<li>être distribués de façon homogène (homoscédasticité), i.e. de variance constante <span class="math inline">\(var(\epsilon_i)=\sigma_{\epsilon}^2\)</span> , indépendante de l'observation</li>
+<li>être distribués de façon homogène (homoscédasticité), i.e. de variance constante <span class="math inline">\(var(\epsilon_i)=\sigma_{\epsilon}^2\)</span> , indépendante de l’observation</li>
 </ul>
 </section><section id="bonus-evaluation-de-lindépendance-des-résidus-avec-r" class="slide level2">
-<h2>Bonus: Evaluation de l'indépendance des résidus avec R</h2>
+<h2>Bonus: Evaluation de l’indépendance des résidus avec R</h2>
 <p>Graphique de la fonction <code>acf</code>:</p>
-<p>Si une barre exceptée la première dépasse la ligne en pointillés, on peut remettre en cause l'indépendance des résidus. Ici, c'est le cas.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)
-<span class="kw">acf</span>(<span class="kw">residuals</span>(modele1))</code></pre></div>
+<p>Si une barre exceptée la première dépasse la ligne en pointillés, on peut remettre en cause l’indépendance des résidus. Ici, c’est le cas.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">acf</span>(<span class="kw">residuals</span>(modele1))</span></code></pre></div>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/residualSigni3-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bonusles-4-graphiques-résultats-de-la-fonction-lm" class="slide level2">
 <h2>Bonus:Les 4 graphiques résultats de la fonction <code>lm</code></h2>
 <p>La fonction <code>lm</code> de R et ses résultats permettent de tracer 4 graphiques pour évaluer certains des critères de significativité.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)
-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># pour avoir une matrice de graphes</span>
-<span class="kw">plot</span>(modele1)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>)) <span class="co"># pour avoir une matrice de graphes</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">plot</span>(modele1)</span></code></pre></div>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/residualSignif-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bonus-évaluer-lhomogénéité-des-résidus-avec-r" class="slide level2">
-<h2>Bonus: Évaluer l'homogénéité des résidus avec R</h2>
-<p>Premier graphique : pour vérifier que le nuage de points est homogène (e.g. pas de relation non-linéaire entre résidus et valeurs prédites)</p>
+<h2>Bonus: Évaluer l’homogénéité des résidus avec R</h2>
+<p>Premier graphique : pour vérifier que le nuage de points est homogène (e.g. pas de relation non-linéaire entre résidus et valeurs prédites)</p>
 <p>Une éventuelle relation non-linéaire pourrait se retrouver dans les résidus(Ici : légère structure parabolique )</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)
-<span class="kw">plot</span>(modele1,<span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">plot</span>(modele1,<span class="dv">1</span>)</span></code></pre></div>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/residualSignif1-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bonus-evaluer-la-normalité-de-la-distribution-des-résidus-avec-r" class="slide level2">
 <h2>Bonus: Evaluer la normalité de la distribution des résidus avec R</h2>
-<p>Le deuxième graphique &quot;Q-Q plot&quot; : pour vérifier l'<strong>hypothèse de normalité des résidus</strong>, les points doivent être proches de la bissectrice</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)
-<span class="kw">plot</span>(modele1,<span class="dv">2</span>)</code></pre></div>
+<p>Le deuxième graphique “Q-Q plot” : pour vérifier l’<strong>hypothèse de normalité des résidus</strong>, les points doivent être proches de la bissectrice</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">plot</span>(modele1,<span class="dv">2</span>)</span></code></pre></div>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/residualSignif2-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="bonus-evaluer-lhomoscédasticité-des-résidus" class="slide level2">
-<h2>Bonus: Evaluer l'homoscédasticité des résidus</h2>
-<p><span style="font-size:18px;"> Le troisème graphique &quot;Scale location&quot; : si les résidus sont distribués de façon homogène suivant les valeurs &quot;fittées&quot;, alors la droite est plutôt horizontale et les points sont disposés de façon homogène autour.</span></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)
-<span class="kw">plot</span>(modele1,<span class="dv">3</span>)</code></pre></div>
+<h2>Bonus: Evaluer l’homoscédasticité des résidus</h2>
+<p><span style="font-size:18px;"> Le troisème graphique “Scale location” : si les résidus sont distribués de façon homogène suivant les valeurs “fittées”, alors la droite est plutôt horizontale et les points sont disposés de façon homogène autour.</span></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>modele1 &lt;-<span class="st"> </span><span class="kw">lm</span>(iris<span class="op">$</span>Petal.Length<span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Petal.Width)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">plot</span>(modele1,<span class="dv">3</span>)</span></code></pre></div>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/residualSignif3-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><span style="font-size:18px;">Ici: légère pente mais les points sont distribués de façon relativement homogène autour de la droite.</span></p>
 </section></section>
-<section><section id="corrélation-de-deux-variables-quantitatives" class="titleslide slide level1"><h1>Corrélation de deux variables quantitatives</h1></section><section id="corrélation-linéaire" class="slide level2">
+<section><section id="corrélation-de-deux-variables-quantitatives" class="title-slide slide level1"><h1>Corrélation de deux variables quantitatives</h1></section><section id="corrélation-linéaire" class="slide level2">
 <h2>Corrélation (linéaire)</h2>
-<p>Dans le cas d'une liaison statistique linéaire entre deux variables, on peut calculer l'«intensité» de ce lien sans nécessairement trouver les coefficients modèle linéaire : c'est la <strong>corrélation</strong></p>
+<p>Dans le cas d’une liaison statistique linéaire entre deux variables, on peut calculer l’«intensité» de ce lien sans nécessairement trouver les coefficients modèle linéaire : c’est la <strong>corrélation</strong></p>
 <p><span class="math inline">\(cor(x,y) \in [-1;1]\)</span> entre deux variables <span class="math inline">\(x\)</span> et <span class="math inline">\(y\)</span> .</p>
 <ul>
 <li>+1 : les deux variables croissent ou décroissent conjointement</li>
-<li>-1 : quand l'une des variables croît, l'autre décroît.</li>
+<li>-1 : quand l’une des variables croît, l’autre décroît.</li>
 <li>0 : pas de relation <strong>linéaire</strong> entre les deux variables</li>
 </ul>
-<p><font size="3">R donne le coefficient de Pearson par defaut, l'argument <code>method</code> de la fonction <code>cor()</code> permet de spécifier deux autres coefficients : Kendall et Spearman.</font></p>
+<p><font size="3">R donne le coefficient de Pearson par defaut, l’argument <code>method</code> de la fonction <code>cor()</code> permet de spécifier deux autres coefficients : Kendall et Spearman.</font></p>
 </section><section id="test-de-corrélation-entre-deux-variables-avec-r" class="slide level2">
 <h2>Test de corrélation entre deux variables avec R</h2>
-<p>Version plus complète : c'est un <strong>test</strong>, on a plusieurs indicateurs statistiques sur ce test, notamment la <strong>p-value</strong> et <strong>l'intervalle de confiance</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(iris<span class="op">$</span>Petal.Length, iris<span class="op">$</span>Petal.Width)</code></pre></div>
+<p>Version plus complète : c’est un <strong>test</strong>, on a plusieurs indicateurs statistiques sur ce test, notamment la <strong>p-value</strong> et <strong>l’intervalle de confiance</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">cor.test</span>(iris<span class="op">$</span>Petal.Length, iris<span class="op">$</span>Petal.Width)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -740,43 +769,43 @@ Si la régression linéaire est avérée, alors pour un individu <span class="ma
 <p><span class="math inline">\(cov(V_1,V_2)= E[(V_1-E[V_1])(V_2-E[V_2])]\)</span></p>
 </section><section id="matrice-de-corrélations" class="slide level2">
 <h2>Matrice de corrélations</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(iris[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">cor</span>(iris[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</span></code></pre></div>
 <pre><code>##              Sepal.Length Sepal.Width Petal.Length Petal.Width
 ## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
 ## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
 ## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
 ## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000</code></pre>
-<p>Présentation des corrélations entre les variables quantitatives d'un tableau, pour tous les couples de variables.</p>
+<p>Présentation des corrélations entre les variables quantitatives d’un tableau, pour tous les couples de variables.</p>
 <p>La matrice de corrélation est symétrique, et sa diagonale est constituée de 1.</p>
 </section><section id="sensibilité-aux-outliers" class="slide level2">
-<h2>Sensibilité aux 'outliers'</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">3</span>)
-Y &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>)
-<span class="kw">plot</span>(X, Y, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">16</span>), <span class="dt">ylim=</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">16</span>))</code></pre></div>
+<h2>Sensibilité aux ‘outliers’</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>X &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">3</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>Y &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">plot</span>(X, Y, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">16</span>), <span class="dt">ylim=</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">16</span>))</span></code></pre></div>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/sensitiveOut1-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(X,Y)<span class="op">$</span>estimate</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">cor.test</span>(X,Y)<span class="op">$</span>estimate</span></code></pre></div>
 <pre><code>## cor 
 ##   0</code></pre>
 </section><section id="sensibilité-aux-outliers-1" class="slide level2">
-<h2>Sensibilité aux 'outliers'</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">15</span>)
-Y &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">15</span>)
-<span class="kw">plot</span>(X, Y, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">16</span>), <span class="dt">ylim=</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">16</span>))</code></pre></div>
+<h2>Sensibilité aux ‘outliers’</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>X &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">15</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>Y &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">15</span>)</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">plot</span>(X, Y, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">16</span>), <span class="dt">ylim=</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">16</span>))</span></code></pre></div>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/sensitiveOut2-1.png" width="576" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(X,Y)<span class="op">$</span>estimate</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">cor.test</span>(X,Y)<span class="op">$</span>estimate</span></code></pre></div>
 <pre><code>##       cor 
 ## 0.9052224</code></pre>
 </section><section id="sensibilité-aux-outliers-2" class="slide level2">
-<h2>Sensibilité aux 'outliers'</h2>
-<p>Outlier : observation &quot;<em>anormale</em>&quot;, par sa valeur extrème , comparée aux autres.</p>
+<h2>Sensibilité aux ‘outliers’</h2>
+<p>Outlier : observation “<em>anormale</em>”, par sa valeur extrème , comparée aux autres.</p>
 <p>La corrélation et la régression linéaire sont très sensibles aux outliers.</p>
-<p><span class="math inline">\(\rightarrow\)</span> s'interroger sur la nécessité de nettoyer/filter les données et des conséquences</p>
+<p><span class="math inline">\(\rightarrow\)</span> s’interroger sur la nécessité de nettoyer/filter les données et des conséquences</p>
 </section></section>
-<section><section id="régression-linéaire-avec-r" class="titleslide slide level1"><h1>Régression linéaire avec R</h1></section><section id="regression-linéaire-avec-r" class="slide level2">
+<section><section id="régression-linéaire-avec-r" class="title-slide slide level1"><h1>Régression linéaire avec R</h1></section><section id="regression-linéaire-avec-r" class="slide level2">
 <h2>Regression linéaire avec R</h2>
 <p>Fonction <code>lm()</code> , modèle de la forme <code>Variable_a_expliquer ~ Variable_explicative</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_model &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Width<span class="op">~</span>Petal.Length, <span class="dt">data=</span>iris)
-<span class="kw">summary</span>(my_model)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>my_model &lt;-<span class="st"> </span><span class="kw">lm</span>(Petal.Width<span class="op">~</span>Petal.Length, <span class="dt">data=</span>iris)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">summary</span>(my_model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Petal.Width ~ Petal.Length, data = iris)
@@ -796,7 +825,7 @@ Y &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</s
 ## Multiple R-squared:  0.9271, Adjusted R-squared:  0.9266 
 ## F-statistic:  1882 on 1 and 148 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section><section id="que-faire-lorsque-la-relation-nest-pas-linéaire" class="slide level2">
-<h2>Que faire lorsque la relation n'est pas linéaire ?</h2>
+<h2>Que faire lorsque la relation n’est pas linéaire ?</h2>
 <p>Quand les deux variables sembles corrélées , de façon <strong>monotone</strong> mais <strong>non linéaire</strong>,</p>
 <p><span class="math inline">\(\rightarrow\)</span> Coefficient de <strong>Spearman</strong>, basé sur le <strong>rang</strong> des individus.</p>
 <center>
@@ -804,10 +833,10 @@ Y &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</s
 </center>
 <p>avec :</p>
 <p><span class="math inline">\(rg(X_i)\)</span> le <em>rang</em> de <span class="math inline">\(X_i\)</span> (le classement de sa valeur) dans la distribution de <span class="math inline">\(X\)</span></p>
-<p><span class="math inline">\(n\)</span> le nombre d'individus</p>
+<p><span class="math inline">\(n\)</span> le nombre d’individus</p>
 </section><section id="obtenir-le-coefficient-de-spearman-avec-r" class="slide level2">
 <h2>Obtenir le coefficient de Spearman avec R</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Sepal.Width, <span class="dt">method=</span><span class="st">&quot;spearman&quot;</span>, <span class="dt">exact =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">cor.test</span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Sepal.Width, <span class="dt">method=</span><span class="st">&quot;spearman&quot;</span>, <span class="dt">exact =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Spearman&#39;s rank correlation rho
 ## 
@@ -817,20 +846,20 @@ Y &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</s
 ## sample estimates:
 ##        rho 
 ## -0.1667777</code></pre>
-<p>l'argument <code>exact</code> doit être précisé en cas de valeurs ex aequo dans les données.</p>
+<p>l’argument <code>exact</code> doit être précisé en cas de valeurs ex aequo dans les données.</p>
 </section><section id="utilisation-conjointe-des-coefficients-de-pearson-et-spearman" class="slide level2">
 <h2>Utilisation conjointe des coefficients de Pearson et Spearman</h2>
-<p><span class="math inline">\(r\)</span> (Pearson) et <span class="math inline">\(\rho\)</span> (Spearman) sont deux moyens d'estimer la corrélation: lequel choisir ?</p>
+<p><span class="math inline">\(r\)</span> (Pearson) et <span class="math inline">\(\rho\)</span> (Spearman) sont deux moyens d’estimer la corrélation: lequel choisir ?</p>
 <p>si <span class="math inline">\(r = \rho\)</span>: on garde <span class="math inline">\(r\)</span> (plus simple à interpréter)</p>
 <p>si <span class="math inline">\(r &lt; \rho\)</span>: la relation est non-linéaire : prendre <span class="math inline">\(\rho\)</span></p>
 <p>si <span class="math inline">\(r &gt; \rho\)</span>: il y a un biais, prendre <span class="math inline">\(\rho\)</span> (plus robuste)</p>
-<p>... et toujours <strong>tracer le nuage de points</strong> pour examiner la nature de la relation.</p>
+<p>… et toujours <strong>tracer le nuage de points</strong> pour examiner la nature de la relation.</p>
 </section></section>
-<section><section id="trucs-pour-linéariser-des-relations-non-linéaires" class="titleslide slide level1"><h1>&quot;trucs&quot; pour linéariser des relations non-linéaires</h1></section><section id="relation-log-linéaire" class="slide level2">
+<section><section id="trucs-pour-linéariser-des-relations-non-linéaires" class="title-slide slide level1"><h1>“trucs” pour linéariser des relations non-linéaires</h1></section><section id="relation-log-linéaire" class="slide level2">
 <h2>Relation log-linéaire</h2>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/loglin-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Relation de type <span class="math inline">\(y=ax^b\)</span></p>
-<p>se linéarise par <span class="math inline">\(ln(y)=aln(x) + ln(b)\)</span></p>
+<p>se linéarise par <span class="math inline">\(ln(y)=bln(x) + ln(a)\)</span></p>
 </section><section id="relation-géométrique-exponentielle" class="slide level2">
 <h2>Relation géométrique (exponentielle)</h2>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/expolin-1.png" width="768" style="display: block; margin: auto;" /></p>
@@ -847,18 +876,18 @@ Y &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</s
 <p>Relation de type <span class="math inline">\(y= y_{min} * \frac{y_{max}-y_{min}}{1+e^{ax+b}}\)</span></p>
 <p>se linéarise par <span class="math inline">\(ln\bigg(\frac{y_{max}-y}{y-y_{min}}\bigg)=ax+b\)</span></p>
 </section></section>
-<section><section id="lien-entre-deux-variables-qualitatives" class="titleslide slide level1"><h1>Lien entre deux variables qualitatives</h1></section><section id="représentation-graphique" class="slide level2">
+<section><section id="lien-entre-deux-variables-qualitatives" class="title-slide slide level1"><h1>Lien entre deux variables qualitatives</h1></section><section id="représentation-graphique" class="slide level2">
 <h2>Représentation graphique</h2>
 <p>Pour deux variables qualitatives, on ne peut pas produire de nuages de points, ni de droite de régression.</p>
-<p><span class="math inline">\(\rightarrow\)</span> on peut représenter la table de contingence (cf. fonction <code>mosaicplot</code> de R).</p>
+<p><span class="math inline">\(\rightarrow\)</span> on peut représenter la table de contingence (cf. fonction <code>mosaicplot</code> de R).</p>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/mosaic-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section><section id="test-statistique-dit-du-chi-2-ou-chi-carré" class="slide level2">
-<h2>Test statistique dit du &quot;Chi 2&quot; ou &quot;Chi carré&quot;</h2>
-<p>Le test du <span class="math inline">\(\chi ^2\)</span> est un test d'indépendance, il mesure l'<strong>écart</strong>, la différence, entre deux distributions de <strong>variables qualitatives</strong></p>
-<p>Il répond à la question : &quot;Existe-t-il un lien statistique entre deux séries de valeurs qualitatives&quot;</p>
-<p>(La réponse est de type OUI/NON , le <span class="math inline">\(\chi^2\)</span> ne donne pas l'<strong>intensité</strong> du lien)</p>
+<h2>Test statistique dit du “Chi 2” ou “Chi carré”</h2>
+<p>Le test du <span class="math inline">\(\chi ^2\)</span> est un test d’indépendance, il mesure l’<strong>écart</strong>, la différence, entre deux distributions de <strong>variables qualitatives</strong></p>
+<p>Il répond à la question : “Existe-t-il un lien statistique entre deux séries de valeurs qualitatives”</p>
+<p>(La réponse est de type OUI/NON , le <span class="math inline">\(\chi^2\)</span> ne donne pas l’<strong>intensité</strong> du lien)</p>
 </section><section id="test-statistique-dit-du-chi-2-ou-chi-carré-1" class="slide level2">
-<h2>Test statistique dit du &quot;Chi 2&quot; ou &quot;Chi carré&quot;</h2>
+<h2>Test statistique dit du “Chi 2” ou “Chi carré”</h2>
 <ul>
 <li>Hypothèse nulle <span class="math inline">\(H_0\)</span> : les deux distributions sont indépendantes.</li>
 <li>«faire le test» permet de conserver ou de rejeter cette hypothèse</li>
@@ -868,13 +897,13 @@ Y &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="dv">1</s
 <ul>
 <li>On génère une <strong>population théorique</strong> à laquelle on va comparer la <strong>population observée</strong> en considérant leurs <strong>distribution</strong>.</li>
 <li>Cette distribution théorique reflête ce qui se passerait si on suppose que <span class="math inline">\(H_0\)</span> est vraie</li>
-<li>Avec cette comparaison, on pourra rejeter ou conserver l'hypothèse nulle.</li>
+<li>Avec cette comparaison, on pourra rejeter ou conserver l’hypothèse nulle.</li>
 </ul>
 <p>La construction de cette distribution se fait à partir du <strong>tableau de contingence</strong></p>
 </section><section id="tableau-de-contingence" class="slide level2">
 <h2>Tableau de contingence</h2>
-<p>C'est un tableau à double entrée qui croise deux <strong>variables qualitatives</strong>.</p>
-<p>Dans une case on trouve l'<strong>effectif</strong> (= le nombre) des individus caractérisés par la conjonction des modalités en ligne et en colonnes.</p>
+<p>C’est un tableau à double entrée qui croise deux <strong>variables qualitatives</strong>.</p>
+<p>Dans une case on trouve l’<strong>effectif</strong> (= le nombre) des individus caractérisés par la conjonction des modalités en ligne et en colonnes.</p>
 <p>Exemple sur des formes géométriques de couleurs :</p>
 <p><span class="math display">\[\begin{array}{c|c|c}
    &amp; blanc &amp; noir \\ 
@@ -900,7 +929,7 @@ carré &amp;  22 &amp;   12 &amp; 34\\
   \hline
   \texttt{total} &amp; 58 &amp; 47 &amp; 105
   \end{array}\]</span></p>
-<p>On appelle les sommes en lignes et en colonnes <strong>sommes marginales</strong>, elles sont mises dans les &quot;marges&quot; du tableau.</p>
+<p>On appelle les sommes en lignes et en colonnes <strong>sommes marginales</strong>, elles sont mises dans les “marges” du tableau.</p>
 </section><section id="construction-de-la-distribution-théorique" class="slide level2">
 <h2>Construction de la distribution théorique</h2>
 <p>En divisant par la taille de la population, on obtient les <strong>fréquences observées</strong>.</p>
@@ -915,8 +944,8 @@ carré &amp;  0.20952381&amp;  0.11428571 &amp;  0.3238095\\
   \hline
   \texttt{total} &amp;  0.552381 &amp; 0.447619 &amp; 1
   \end{array}\]</span></p>
-<p><font size="4"> On obtient les <strong>pourcentages de l'effectif</strong> dans les cases du tableau.</p>
-<p>C'est également la <strong>probabilité</strong> , qu'un individu de la <strong>population observée</strong> soit caractérisé par les modalités en ligne et en colonne. </font></p>
+<p><font size="4"> On obtient les <strong>pourcentages de l’effectif</strong> dans les cases du tableau.</p>
+<p>C’est également la <strong>probabilité</strong> , qu’un individu de la <strong>population observée</strong> soit caractérisé par les modalités en ligne et en colonne. </font></p>
 </section><section id="construction-de-la-distribution-théorique-1" class="slide level2">
 <h2>Construction de la distribution théorique</h2>
 <p><span class="math display">\[\begin{array}{c|c|c|c}
@@ -930,17 +959,17 @@ carré &amp;  0.20952381&amp;  0.11428571 &amp;  \textbf{0.3238095}\\
   \hline
   \texttt{total} &amp;  \textbf{0.552381} &amp; \textbf{0.447619} &amp; 1
   \end{array}\]</span></p>
-<p>De la même façon, les <strong>fréquences marginales</strong> (marges divisées par la taille de la pop.), donnent la <strong>probabilité</strong> d'observer un individu de la modalité correspondant à la ligne ou à la colonne considérée.</p>
-<p><font size="4"> Exemple : dans cette population , j'ai 29.5% de chances de tirer un triangle, et 55% de chances de tirer une pièce blanche. </font></p>
+<p>De la même façon, les <strong>fréquences marginales</strong> (marges divisées par la taille de la pop.), donnent la <strong>probabilité</strong> d’observer un individu de la modalité correspondant à la ligne ou à la colonne considérée.</p>
+<p><font size="4"> Exemple : dans cette population , j’ai 29.5% de chances de tirer un triangle, et 55% de chances de tirer une pièce blanche. </font></p>
 </section><section id="construction-de-la-distribution-théorique-2" class="slide level2">
 <h2>Construction de la distribution théorique</h2>
 <p>Rappel : Probabilité conjointe de deux évènements <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> <strong>indépendants</strong><br />
 <span class="math inline">\(P(A \cap B) = P(A) \times P(B)\)</span></p>
 <p>À partir des <strong>fréquences marginales</strong> précédentes, on obtient pour chaque couple de modalités, la probabilité <strong>théorique</strong>, celle qui suppose <span class="math inline">\(H_0\)</span>, par un simple <strong>produit</strong>.</p>
-<p><font size="4"> Exemple : Si <span class="math inline">\(H_0\)</span> est vraie, la probabilité d'observer un triangle noir est donnée par:</p>
+<p><font size="4"> Exemple : Si <span class="math inline">\(H_0\)</span> est vraie, la probabilité d’observer un triangle noir est donnée par:</p>
 <p><span class="math inline">\(P(triangle \cap noir) = P(triangle) \times P(noir)\)</span></p>
 <p><span class="math inline">\(P(triangle \cap noir) =0.447619 \times 0.2952381 = 0.1321542\)</span></p>
-<p>La probabilité théorique d'observer un triangle noir est de 13,2%<br />
+<p>La probabilité théorique d’observer un triangle noir est de 13,2%<br />
 </font></p>
 </section><section id="construction-de-la-distribution-théorique-3" class="slide level2">
 <h2>Construction de la distribution théorique</h2>
@@ -956,10 +985,10 @@ carré &amp;  0.1788662 &amp;   0.1449433 &amp;  \textbf{0.3238095}\\
   \hline
   \texttt{total} &amp;  \textbf{0.552381} &amp; \textbf{0.447619} &amp; 1
   \end{array}\]</span></p>
-<p>C'est le tableau des <strong>fréquences théoriques</strong>.</p>
+<p>C’est le tableau des <strong>fréquences théoriques</strong>.</p>
 </section><section id="tableau-des-effectifs-théoriques" class="slide level2">
 <h2>Tableau des effectifs théoriques</h2>
-<p>On l'obtient en multipliant les fréquences théoriques par la taille de la population observée (ici 105)</p>
+<p>On l’obtient en multipliant les fréquences théoriques par la taille de la population observée (ici 105)</p>
 <p><span class="math display">\[\begin{array}{c|c|c}
    &amp; blanc &amp; noir \\ 
    \hline
@@ -969,10 +998,10 @@ carré &amp;  18.78095 &amp;  15.21905 \\
     \hline
   triangle &amp; 17.12381 &amp; 13.87619   \\
   \end{array}\]</span></p>
-<p><font size="4"> N.B. Il n'est pas nécessaire d'arrondir les effectifs théoriques </font></p>
+<p><font size="4"> N.B. Il n’est pas nécessaire d’arrondir les effectifs théoriques </font></p>
 </section><section id="calcul-du-chi-2" class="slide level2">
 <h2>Calcul du Chi 2</h2>
-<p>C'est la somme, pour chaque case du tableau de contingence (i.e. pour chaque couple de modalités), des écarts carrés entre effectif observé et effectif théorique**, divisés par l'effectif théorique.</p>
+<p>C’est la somme, pour chaque case du tableau de contingence (i.e. pour chaque couple de modalités), des écarts carrés entre effectif observé et effectif théorique**, divisés par l’effectif théorique.</p>
 <p>Soient <span class="math inline">\(T^{obs}\)</span> le tableau des effectifs observés, <span class="math inline">\(T^{theo}\)</span> le tableau des effectifs théoriques,</p>
 <center>
 <span class="math inline">\(\chi^2 = \sum_{i,j} \frac{( T^{obs}_{i,j} - T^{theo}_{i,j})^2}{T^{obs}_{i,j}}\)</span>
@@ -980,22 +1009,22 @@ carré &amp;  18.78095 &amp;  15.21905 \\
 <p>ici : <span class="math inline">\(\chi^2 = 26.30329\)</span></p>
 </section><section id="interprétation-du-chi-2" class="slide level2">
 <h2>Interprétation du Chi 2</h2>
-<p>Il faut comparé la valeur du <span class="math inline">\(\chi^2\)</span> calculée avec la <strong>valeur critique</strong> qu'on trouve dans une <strong>table de loi de Student</strong> (ou table de loi du chi 2).</p>
-<p>C'est un tableau à double entrée : une <strong>valeur de quantile</strong>, et un <strong>degré de liberté</strong>.</p>
-<p>On peut considérer que la valeur de quantile est le pourcentage d'erreur qu'on s'autorise de faire. On prend souvent <strong>5%</strong> : la colonne 1-0.05 = 0.95</p>
+<p>Il faut comparé la valeur du <span class="math inline">\(\chi^2\)</span> calculée avec la <strong>valeur critique</strong> qu’on trouve dans une <strong>table de loi de Student</strong> (ou table de loi du chi 2).</p>
+<p>C’est un tableau à double entrée : une <strong>valeur de quantile</strong>, et un <strong>degré de liberté</strong>.</p>
+<p>On peut considérer que la valeur de quantile est le pourcentage d’erreur qu’on s’autorise de faire. On prend souvent <strong>5%</strong> : la colonne 1-0.05 = 0.95</p>
 <p>Le degré de liberté est obtenu en calculant la valeur <span class="math inline">\((nb\_lignes - 1)*(nb\_colonnes -1)\)</span>.</p>
 <p>Dans notre exemple , le degré de liberté est 2*1 = 2</p>
 </section><section id="table-de-loi-de-student" class="slide level2">
 <h2>Table de loi de Student</h2>
 <center>
-<img src="table.loi.de.student.png", width=100%></img>
+&lt;img src=“table.loi.de.student.png”, width=100%&gt;</img>
 </center>
 </section><section id="interprétation-du-chi-2-1" class="slide level2">
 <h2>Interprétation du Chi 2</h2>
-<p>D'après le tableau de la loi de Student , la valeur critique pour un test avec 5% de chances de se tromper est un degré de liberté de 2 vaut 4.303.</p>
+<p>D’après le tableau de la loi de Student , la valeur critique pour un test avec 5% de chances de se tromper est un degré de liberté de 2 vaut 4.303.</p>
 <p>Si la valeur calculée du <span class="math inline">\(\chi^2\)</span> est <strong>supérieure</strong> à la valeur critique, on <strong>rejette</strong> <span class="math inline">\(H_0\)</span>.</p>
-<p>Pour notre exemple: On rejette <span class="math inline">\(H_0\)</span>, i.e. les deux variables sont <strong>dépendantes</strong>, car <span class="math inline">\(\chi ^2 \approx 26 &gt; 4.303\)</span></p>
-<p>Interprétation: «la forme est liée à la couleur dans cette population, nous pouvons l'affirmer avec un risque d'erreur d'au moins 5%»</p>
+<p>Pour notre exemple: On rejette <span class="math inline">\(H_0\)</span>, i.e. les deux variables sont <strong>dépendantes</strong>, car <span class="math inline">\(\chi ^2 \approx 26 &gt; 4.303\)</span></p>
+<p>Interprétation: «la forme est liée à la couleur dans cette population, nous pouvons l’affirmer avec un risque d’erreur d’au moins 5%»</p>
 </section><section id="les-étapes-du-chi-2" class="slide level2">
 <h2>Les étapes du <span class="math inline">\(\chi ^2\)</span></h2>
 <ul>
@@ -1005,12 +1034,12 @@ carré &amp;  18.78095 &amp;  15.21905 \\
 <li>Calcul des fréquences observées</li>
 <li>Calcul des fréquences théoriques</li>
 </ul></li>
-<li>Tableau d'effectifs théoriques</li>
+<li>Tableau d’effectifs théoriques</li>
 <li>Calcul de la valeur du test</li>
 <li>Comparaison avec les valeurs de la table de Student</li>
 </ul>
 </section></section>
-<section><section id="lien-entre-une-variable-qualitative-et-une-variable-quantitative." class="titleslide slide level1"><h1>Lien entre une variable qualitative et une variable quantitative.</h1></section><section id="représentation-graphique." class="slide level2">
+<section><section id="lien-entre-une-variable-qualitative-et-une-variable-quantitative." class="title-slide slide level1"><h1>Lien entre une variable qualitative et une variable quantitative.</h1></section><section id="représentation-graphique." class="slide level2">
 <h2>Représentation graphique.</h2>
 <p>Pas de moyen <strong>simple</strong> de calculer le lien entre une variable qualitative et une variable quantitative.</p>
 <ul>
@@ -1023,12 +1052,12 @@ carré &amp;  18.78095 &amp;  15.21905 \\
 <p>2 possibilités :</p>
 <ul>
 <li>boîtes à moustaches</li>
-<li>superposition d' histogrammes / densités</li>
+<li>superposition d’ histogrammes / densités</li>
 </ul>
 </section><section id="les-boîtes-à-moustaches" class="slide level2">
 <h2>Les boîtes à moustaches</h2>
-<p>&quot;Boîte à moustaches&quot;, aussi appellées &quot;boxplot&quot;, montre les quartiles d'une variable</p>
-<p>Quartile = «quantile de 4», valeurs qui séparent une variable quantitative en quarts, i.e. paquets d'un quart de l'effectif</p>
+<p>“Boîte à moustaches”, aussi appellées “boxplot”, montre les quartiles d’une variable</p>
+<p>Quartile = «quantile de 4», valeurs qui séparent une variable quantitative en quarts, i.e. paquets d’un quart de l’effectif</p>
 <ul>
 <li>Premier quartile : sépare les 25% inférieurs des valeurs</li>
 <li>Second quartile : <strong>mediane</strong>, sépare les 50% inférieurs des valeurs</li>
@@ -1044,7 +1073,7 @@ carré &amp;  18.78095 &amp;  15.21905 \\
 <p>E.g. : consommation de véhicules par type (dataset <code>mpg</code> de R)</p>
 <p><img src="CoursBivariee_PC_files/figure-revealjs/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
 </section></section>
-<section><section id="références-supplémentaires" class="titleslide slide level1"><h1>Références supplémentaires</h1></section><section id="refs" class="slide level2">
+<section><section id="références-supplémentaires" class="title-slide slide level1"><h1>Références supplémentaires</h1></section><section id="refs" class="slide level2">
 <h2>Refs</h2>
 <p>Cours complet sur les modèles linéaires : [<a href="https://www.math.univ-toulouse.fr/~barthe/M1modlin/poly.pdf" class="uri">https://www.math.univ-toulouse.fr/~barthe/M1modlin/poly.pdf</a>]</p>
 <p>Interprétation des graphique de <code>lm</code> en R : [<a href="https://data.library.virginia.edu/diagnostic-plots/" class="uri">https://data.library.virginia.edu/diagnostic-plots/</a>]</p>

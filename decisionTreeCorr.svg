@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="427.78674mm"
+   height="265.55817mm"
+   viewBox="0 0 427.78674 265.55817"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="decisionTreeCorr.svg">
   <defs
      id="defs2">
@@ -137,8 +137,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="1173.5866"
-     inkscape:cy="483.69295"
+     inkscape:cx="707.53833"
+     inkscape:cy="397.81784"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -146,7 +146,11 @@
      inkscape:window-height="1056"
      inkscape:window-x="65"
      inkscape:window-y="24"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -162,7 +166,8 @@
   <g
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-1.96824,-8.7207072)">
     <g
        id="g865">
       <text
@@ -569,40 +574,35 @@
            sodipodi:role="line">-</tspan></text>
     </g>
     <rect
-       style="opacity:0.8;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99607843"
+       style="opacity:0.8;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.50917876;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99607843"
        id="rect1227"
-       width="124.68607"
-       height="46.113094"
-       x="250.97618"
-       y="207.04167"
-       ry="0.28669733" />
+       width="152.50209"
+       height="34.907761"
+       x="250.96619"
+       y="207.03168"
+       ry="0.21703081" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.30452538px;line-height:100%;font-family:gi;-inkscape-font-specification:gi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.30452538px;line-height:100%;font-family:gi;-inkscape-font-specification:gi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="255.5677"
        y="220.31706"
        id="text1215"
-       transform="scale(1.0009489,0.99905204)"><tspan
+       transform="scale(1.0009489,0.99905202)"><tspan
          sodipodi:role="line"
          id="tspan1213"
          x="255.5677"
          y="220.31706"
-         style="fill:#000000;stroke-width:0.26458332px;">penser à transformer </tspan><tspan
+         style="fill:#000000;stroke-width:0.26458332px">essayer des transformations </tspan><tspan
          sodipodi:role="line"
          x="255.5677"
-         y="231.60596"
-         style="fill:#000000;stroke-width:0.26458332px;"
-         id="tspan1219">mathématiquement </tspan><tspan
+         y="228.62158"
+         style="fill:#000000;stroke-width:0.26458332px"
+         id="tspan1219">mathématiques</tspan><tspan
          sodipodi:role="line"
          x="255.5677"
-         y="242.89484"
-         style="fill:#000000;stroke-width:0.26458332px;"
-         id="tspan1217">la donnée, à utiliser </tspan><tspan
-         sodipodi:role="line"
-         x="255.5677"
-         y="254.18373"
-         style="fill:#000000;stroke-width:0.26458332px;"
-         id="tspan1225">le coefficient de Spearman </tspan></text>
+         y="236.92612"
+         style="fill:#000000;stroke-width:0.26458332px"
+         id="tspan1225">utiliser le coefficient de Spearman </tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:100%;font-family:gi;-inkscape-font-specification:gi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

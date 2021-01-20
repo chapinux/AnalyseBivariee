@@ -548,7 +548,7 @@ plo2
 
 Relation de type $y=ax^b$ 
 
-se linéarise par $ln(y)=aln(x) + ln(b)$
+se linéarise par $ln(y)=bln(x) + ln(a)$
 
 
 
